@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collection = "accounts")
+@Document(collection = "employer_accounts")
 @Getter
 @Setter
 @AllArgsConstructor
