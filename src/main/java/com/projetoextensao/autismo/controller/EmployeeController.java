@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projetoextensao.autismo.model.dto.AccountFormDTO;
 import com.projetoextensao.autismo.model.dto.EmployeeFormDTO;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
+import com.projetoextensao.autismo.service.AccountService;
 import com.projetoextensao.autismo.service.EmployeeService;
 
 import jakarta.servlet.http.HttpSession;
@@ -27,12 +28,17 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService service;
 	
+	@Autowired
+	private AccountService accountService;
+	
 	@PostMapping(value = "/register")
 	public ResponseEntity<EmployeeAccount> registerEmployee(@RequestBody EmployeeFormDTO employeeDTO, HttpSession session) {
 		AccountFormDTO accountDTO = (AccountFormDTO) session.getAttribute("employeeData");
 		System.out.println(accountDTO);
 		
 		EmployeeAccount employeeSave = service.saveEmployee(accountDTO, employeeDTO);
+		accountService.saveAccount(accountDTO);
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(employeeSave);
 	}
 	
