@@ -1,5 +1,7 @@
 package com.projetoextensao.autismo.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,13 +19,18 @@ import jakarta.servlet.http.HttpSession;
 public class AccountController {
 	
 	@PostMapping
-	public void registerAccount(@RequestBody AccountFormDTO accountDTO, HttpSession session) {
+	public ResponseEntity<Void> registerAccount(@RequestBody AccountFormDTO accountDTO, HttpSession session) {
+		System.out.println(accountDTO);
+		
 		if (accountDTO.account().equals(TypeAccount.EMPLOYEE)) {
 			
 			session.setAttribute("employeeData", accountDTO);
+			return new ResponseEntity<>(HttpStatus.PERMANENT_REDIRECT);
 		} else if (accountDTO.account().equals(TypeAccount.EMPLOYER)) {
 			
 			session.setAttribute("employerData", accountDTO);
+			return new ResponseEntity<>(HttpStatus.PERMANENT_REDIRECT);
 		}
+		return null;
 	}
 }

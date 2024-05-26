@@ -2,15 +2,11 @@ package com.projetoextensao.autismo.model.dto;
 
 import java.time.LocalDate;
 
-import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public record EmployerFormDTO(
-		String firstName, 
-		String lastName, 
-		String email, 
-		String password, 
-		TypeAccount account,
 		String id,
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 		LocalDate createdAt,
 		String companyName,
 		String cnpj,

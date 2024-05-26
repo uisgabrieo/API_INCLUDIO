@@ -30,6 +30,7 @@ public class EmployeeController {
 	@PostMapping(value = "/register")
 	public ResponseEntity<EmployeeAccount> registerEmployee(@RequestBody EmployeeFormDTO employeeDTO, HttpSession session) {
 		AccountFormDTO accountDTO = (AccountFormDTO) session.getAttribute("employeeData");
+		System.out.println(accountDTO);
 		
 		EmployeeAccount employeeSave = service.saveEmployee(accountDTO, employeeDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(employeeSave);

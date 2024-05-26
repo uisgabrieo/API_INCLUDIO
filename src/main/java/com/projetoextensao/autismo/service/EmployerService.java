@@ -28,7 +28,7 @@ public class EmployerService {
 	}
 
 	private EmployerAccount dtoFromEmployerAccount(AccountFormDTO accountDTO, EmployerFormDTO employerDTO) {
-		EmployerAccount employer = new EmployerAccount(accountDTO.firstName(), accountDTO.lastName(),
+		EmployerAccount employer = new EmployerAccount(accountDTO.completeName(),
 				accountDTO.email(), accountDTO.password(), accountDTO.account(), null, employerDTO.createdAt(),
 				employerDTO.companyName(), employerDTO.cnpj(), employerDTO.companyEmail(), employerDTO.website(),
 				employerDTO.country(), employerDTO.state(), employerDTO.city(), employerDTO.numberPhone(),

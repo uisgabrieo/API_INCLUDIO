@@ -30,7 +30,7 @@ public class EmployeeService {
 	
 	private EmployeeAccount dtoFromEmployeeAccount(AccountFormDTO accountDTO, EmployeeFormDTO employeeDTO) {
 		EmployeeAccount employee = new EmployeeAccount(
-				accountDTO.firstName(), accountDTO.lastName(), accountDTO.email(), accountDTO.password(), accountDTO.account(),
+				accountDTO.completeName(), accountDTO.email(), accountDTO.password(), accountDTO.account(),
 				null, employeeDTO.dateOfBirth(), employeeDTO.cpf(), employeeDTO.country(), employeeDTO.state(), 
 				employeeDTO.city(), employeeDTO.cep(), employeeDTO.numberPhone()); 
 		return employee;

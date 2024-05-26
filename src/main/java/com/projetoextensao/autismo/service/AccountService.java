@@ -21,8 +21,7 @@ public class AccountService {
 	
 	private Account dtoFromAccount(AccountFormDTO dto) {
 		Account account = new Account(
-				dto.firstName(), 
-				dto.lastName(), 
+				dto.completeName(), 
 				dto.email(), 
 				dto.password(), 
 				dto.account()); 
