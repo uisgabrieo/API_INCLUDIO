@@ -32,7 +32,8 @@ public class EmployeeService {
 		EmployeeAccount employee = new EmployeeAccount(
 				accountDTO.completeName(), accountDTO.email(), accountDTO.password(), accountDTO.account(),
 				null, employeeDTO.dateOfBirth(), employeeDTO.cpf(), employeeDTO.country(), employeeDTO.state(), 
-				employeeDTO.city(), employeeDTO.cep(), employeeDTO.numberPhone()); 
+				employeeDTO.city(), employeeDTO.cep(), employeeDTO.numberPhone(), employeeDTO.diagnostic(), 
+				employeeDTO.photograph(), employeeDTO.gender()); 
 		return employee;
 	}
 }

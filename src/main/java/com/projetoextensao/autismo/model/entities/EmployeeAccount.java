@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projetoextensao.autismo.model.entities.enums.GenderUser;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
 
 import lombok.AllArgsConstructor;
@@ -30,10 +31,13 @@ public class EmployeeAccount extends Account{
 	private String city;
 	private String cep;
 	private String numberPhone;
+	private String diagnostic;
+	private String photograph;
+	private GenderUser gender;
 	
-	public EmployeeAccount(String completeName, String email, String password, TypeAccount account,
-			String id, LocalDate dateOfBirth, String cpf, String country, String state, String city, String cep,
-			String numberPhone) {
+	public EmployeeAccount(String completeName, String email, String password, TypeAccount account, String id,
+			LocalDate dateOfBirth, String cpf, String country, String state, String city, String cep,
+			String numberPhone, String diagnostic, String photograph, GenderUser gender) {
 		super(completeName, email, password, account);
 		this.id = id;
 		this.dateOfBirth = dateOfBirth;
@@ -43,8 +47,9 @@ public class EmployeeAccount extends Account{
 		this.city = city;
 		this.cep = cep;
 		this.numberPhone = numberPhone;
+		this.diagnostic = diagnostic;
+		this.photograph = photograph;
+		this.gender = gender;
 	}
-	
-	
 	
 }
