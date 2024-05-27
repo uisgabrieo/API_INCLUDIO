@@ -35,6 +35,7 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeAccount> registerEmployee(@RequestBody EmployeeFormDTO employeeDTO, HttpSession session) {
 		AccountFormDTO accountDTO = (AccountFormDTO) session.getAttribute("employeeData");
 		System.out.println(accountDTO);
+		System.out.println(employeeDTO);
 		
 		EmployeeAccount employeeSave = service.saveEmployee(accountDTO, employeeDTO);
 		accountService.saveAccount(accountDTO);
