@@ -1,4 +1,4 @@
-package com.projetoextensao.autismo.model.config;
+package com.projetoextensao.autismo.model.util;
 
 import java.io.File;
 import java.io.IOException;
