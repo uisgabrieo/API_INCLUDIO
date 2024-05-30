@@ -17,9 +17,10 @@ import com.projetoextensao.autismo.model.dto.EmployeeFormDTO;
 import com.projetoextensao.autismo.model.dto.RegistrationEmployeeDTO;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
 import com.projetoextensao.autismo.service.AccountService;
-import com.projetoextensao.autismo.service.EmployeeService;	
+import com.projetoextensao.autismo.service.EmployeeService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RestController
@@ -32,18 +33,18 @@ public class EmployeeController {
 	@Autowired
 	private AccountService accountService;
 	
-	@PostMapping(value = "/register")	
-	public ResponseEntity<EmployeeAccount> registerEmployee(@RequestBody RegistrationEmployeeDTO fullRegister, HttpSession session) {
+	@PostMapping(value = "/register")
+	public ResponseEntity<EmployeeAccount> registerEmployee(@Valid @RequestBody RegistrationEmployeeDTO fullRegister, HttpSession session) {
 		//AccountFormDTO accountDTO = (AccountFormDTO) session.getAttribute("employeeData");
 		EmployeeFormDTO employeeDTO = fullRegister.employeeDTO();
 		AccountFormDTO accountDTO = fullRegister.accountDTO();
 		
-		System.out.println(employeeDTO); 
+		System.out.println(employeeDTO);
 		System.out.println(accountDTO);
-		
 		EmployeeAccount employeeSave = service.saveEmployee(accountDTO, employeeDTO);
-		System.out.println(employeeSave);
 		accountService.saveAccount(accountDTO);
+		
+		System.out.println(employeeSave);
 		
 		return new ResponseEntity<>(employeeSave, HttpStatus.OK);
 	}

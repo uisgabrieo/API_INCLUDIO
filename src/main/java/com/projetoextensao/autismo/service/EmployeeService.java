@@ -22,8 +22,7 @@ public class EmployeeService {
 	}
 	
 	public EmployeeAccount saveEmployee(AccountFormDTO accountDTO, EmployeeFormDTO employeeDTO) {
-		System.out.println("SERVICE: " + accountDTO);
-		System.out.println("SERVICE: " + employeeDTO);
+
 		EmployeeAccount employee = dtoFromEmployeeAccount(accountDTO, employeeDTO);
 		EmployeeAccount employeeAccount = repository.save(employee);
 		return employeeAccount;

@@ -1,5 +1,7 @@
 package com.projetoextensao.autismo.model.dto;
 
-public record RegistrationEmployeeDTO (EmployeeFormDTO employeeDTO, AccountFormDTO accountDTO) {
+import jakarta.validation.Valid;
+
+public record RegistrationEmployeeDTO (@Valid EmployeeFormDTO employeeDTO, AccountFormDTO accountDTO) {
 	
 }

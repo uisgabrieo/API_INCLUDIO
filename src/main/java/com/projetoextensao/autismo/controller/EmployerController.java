@@ -20,6 +20,7 @@ import com.projetoextensao.autismo.service.AccountService;
 import com.projetoextensao.autismo.service.EmployerService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RestController
@@ -33,14 +34,12 @@ public class EmployerController {
 	private AccountService accountService;
 	
 	@PostMapping(value = "/register")
-	public ResponseEntity<EmployerAccount> registerEmployer(@RequestBody RegistrationEmployerDTO fullRegister, HttpSession session) {
+	public ResponseEntity<EmployerAccount> registerEmployer(@Valid @RequestBody RegistrationEmployerDTO fullRegister, HttpSession session) {
 		AccountFormDTO accountDTO = fullRegister.accountDTO();
 		EmployerFormDTO employerDTO = fullRegister.employerDTO();
 		
-		System.out.println(accountDTO);
-		System.out.println(employerDTO);
 		EmployerAccount employerSave = service.saveEmployer(accountDTO, employerDTO);
-		System.out.println(employerDTO);
+		
 		accountService.saveAccount(accountDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(employerSave);
 	}
