@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projetoextensao.autismo.model.dto.AccountFormDTO;
 import com.projetoextensao.autismo.model.dto.EmployeeFormDTO;
+import com.projetoextensao.autismo.model.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
 import com.projetoextensao.autismo.respository.EmployeeRepository;
 

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projetoextensao.autismo.model.dto.AccountFormDTO;
 import com.projetoextensao.autismo.model.dto.EmployeeFormDTO;
 import com.projetoextensao.autismo.model.dto.RegistrationEmployeeDTO;
+import com.projetoextensao.autismo.model.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
 import com.projetoextensao.autismo.service.AccountService;
 import com.projetoextensao.autismo.service.EmployeeService;
@@ -34,7 +34,7 @@ public class EmployeeController {
 	private AccountService accountService;
 	
 	@PostMapping(value = "/register")
-	public ResponseEntity<EmployeeAccount> registerEmployee(@Valid @RequestBody RegistrationEmployeeDTO fullRegister, HttpSession session) {
+	public ResponseEntity<EmployeeAccount> registerEmployee(@Valid @RequestBody RegistrationEmployeeDTO fullRegister /*EmployeeFormDTO employeeDTO*/, HttpSession session) {
 		//AccountFormDTO accountDTO = (AccountFormDTO) session.getAttribute("employeeData");
 		EmployeeFormDTO employeeDTO = fullRegister.employeeDTO();
 		AccountFormDTO accountDTO = fullRegister.accountDTO();

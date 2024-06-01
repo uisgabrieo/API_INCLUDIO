@@ -1,6 +1,7 @@
 package com.projetoextensao.autismo.exception;
 
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +14,25 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> notValid(MethodArgumentNotValidException e) {
-		String message = e.getMessage();
-		String error = "MethodArgumentNotValidException";
+		List<String> errors = e.getBindingResult()
+								.getFieldErrors()
+								.stream()
+								.map(x -> x.getField() + ": " + x.getDefaultMessage()).toList();
+		String message = String.join(", ", errors);
+		String error = "Bad Request";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		
-		StandardError err = new StandardError(LocalDate.now(), status, error, message);
+		StandardError err = new StandardError(Instant.now(), status, error, message);
 		return new ResponseEntity<>(err, err.getStatus());
 	}
 	
+	@ExceptionHandler(NullPointerException.class)
+	public ResponseEntity<StandardError> nullPont(NullPointerException e) {
+		String message = "Null Pointer";
+		String error = "Internal Server Error";
+		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+		
+		StandardError err = new StandardError(Instant.now(), status, error, message);
+		return new ResponseEntity<>(err, err.getStatus());
+	}
 }

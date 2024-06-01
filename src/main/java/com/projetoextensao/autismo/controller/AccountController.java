@@ -1,5 +1,6 @@
 package com.projetoextensao.autismo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -8,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projetoextensao.autismo.model.dto.AccountFormDTO;
+import com.projetoextensao.autismo.model.dto.account.AccountFormDTO;
+import com.projetoextensao.autismo.model.dto.account.AccountLoginDTO;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
+import com.projetoextensao.autismo.service.AccountService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -17,6 +20,9 @@ import jakarta.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/api/account")
 public class AccountController {
+	
+	@Autowired
+	private AccountService service;
 	
 	@PostMapping
 	public ResponseEntity<Void> registerAccount(@RequestBody AccountFormDTO accountDTO, HttpSession session) {
@@ -32,5 +38,16 @@ public class AccountController {
 			return new ResponseEntity<>(HttpStatus.PERMANENT_REDIRECT);
 		}
 		return null;
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<Boolean> loginAccount(@RequestBody AccountLoginDTO login) {
+		
+		Boolean loginValidation = service.valiation(login);
+		if (loginValidation) {
+			return new ResponseEntity<>(loginValidation, HttpStatus.ACCEPTED);
+		}
+		return new ResponseEntity<>(loginValidation, HttpStatus.NOT_FOUND);
+		
 	}
 }
