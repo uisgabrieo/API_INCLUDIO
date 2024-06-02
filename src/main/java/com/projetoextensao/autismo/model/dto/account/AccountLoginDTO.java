@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Email;
 
 public record AccountLoginDTO(
 		@Email 
-		String emai, 
+		String email, 
 		String password) {
 
 }

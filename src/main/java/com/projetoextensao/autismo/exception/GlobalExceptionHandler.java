@@ -1,7 +1,7 @@
 package com.projetoextensao.autismo.exception;
 
 import java.time.Instant;
-import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,7 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> notValid(MethodArgumentNotValidException e) {
-		List<String> errors = e.getBindingResult()
-								.getFieldErrors()
-								.stream()
-								.map(x -> x.getField() + ": " + x.getDefaultMessage()).toList();
-		String message = String.join(", ", errors);
+		String message = "Not Valid";
 		String error = "Bad Request";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		
@@ -31,6 +27,16 @@ public class GlobalExceptionHandler {
 		String message = "Null Pointer";
 		String error = "Internal Server Error";
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+		
+		StandardError err = new StandardError(Instant.now(), status, error, message);
+		return new ResponseEntity<>(err, err.getStatus());
+	}
+	
+	@ExceptionHandler(NoSuchElementException.class)
+	public ResponseEntity<StandardError> noValue(NoSuchElementException e) {
+		String message = "No value present";
+		String error = "Not Found";
+		HttpStatus status = HttpStatus.NOT_FOUND;
 		
 		StandardError err = new StandardError(Instant.now(), status, error, message);
 		return new ResponseEntity<>(err, err.getStatus());

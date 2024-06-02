@@ -23,7 +23,10 @@ public class AccountService {
 	}
 	
 	public Boolean valiation(AccountLoginDTO login) {
-		Optional<Account> account = repository.findByEmail(login.emai());
+		System.out.println("Entrou na validação");
+		System.out.println("Email: " + login.email());
+		Optional<Account> account = repository.findByEmail(login.email());
+		System.out.println(account);
 		if (account.get().getPassword().equals(login.password())) {
 			return true;
 		}

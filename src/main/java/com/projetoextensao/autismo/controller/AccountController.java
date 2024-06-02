@@ -43,11 +43,13 @@ public class AccountController {
 	@PostMapping("/login")
 	public ResponseEntity<Boolean> loginAccount(@RequestBody AccountLoginDTO login) {
 		
+		System.out.println(login);
 		Boolean loginValidation = service.valiation(login);
+		System.out.println(loginValidation);
 		if (loginValidation) {
-			return new ResponseEntity<>(loginValidation, HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(loginValidation, HttpStatus.OK);
 		}
-		return new ResponseEntity<>(loginValidation, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(loginValidation, HttpStatus.NOT_FOUND);	
 		
 	}
 }
