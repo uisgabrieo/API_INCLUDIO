@@ -1,6 +1,6 @@
 package com.projetoextensao.autismo.model.entities;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +26,14 @@ public class Post {
 	private String id;
 	private String role;
 	private JobType jobType;
-	private Instant createAt;
+	private LocalDate createAt;
 	private String description;
 	private String requirements;
 	private List<String> field = new ArrayList<>();
 	
 	private AuthorDTO author; 
 	
-	public Post (String id, String role, JobType jobType, Instant createAt, String decription, String requirements, AuthorDTO author) {
+	public Post (String id, String role, JobType jobType, LocalDate createAt, String decription, String requirements, AuthorDTO author) {
 		this.id = id;
 		this.role = role;
 		this.jobType = jobType;

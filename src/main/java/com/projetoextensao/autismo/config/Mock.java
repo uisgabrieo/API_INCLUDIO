@@ -1,6 +1,5 @@
 package com.projetoextensao.autismo.config;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -61,8 +60,8 @@ public class Mock implements CommandLineRunner{
 		accountRepository.save(ae1);
 		employerRepository.save(e1);
 		
-		Post p1 = new Post(null, "Dev back-end", JobType.REMOTE, Instant.now(), "Vaga para desenvolvedor back-end", "Saber Spring, Java 8+", new AuthorDTO(e1));
-		Post p2 = new Post(null, "Secretário(a)", JobType.IN_PRESON, Instant.now(), "Vaga para secretário(a) de clínica psiquiatrica", "Habilidade com o público", new AuthorDTO(e1));
+		Post p1 = new Post(null, "Dev back-end", JobType.REMOTE, LocalDate.now(), "Vaga para desenvolvedor back-end", "Saber Spring, Java 8+", new AuthorDTO(e1));
+		Post p2 = new Post(null, "Secretário(a)", JobType.IN_PRESON, LocalDate.now(), "Vaga para secretário(a) de clínica psiquiatrica", "Habilidade com o público", new AuthorDTO(e1));
 
 		p1.getField().addAll(Arrays.asList("Tecnologia", "Contabiliades"));
 		p2.getField().addAll(Arrays.asList("Livre"));

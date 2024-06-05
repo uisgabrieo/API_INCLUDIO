@@ -6,7 +6,7 @@ public record AuthorDTO (
 		String id, 
 		String name, 
 		String email, 
-		String comapanyName) {
+		String companyName) {
 	
 	public AuthorDTO(EmployerAccount employer) {
         this(employer.getId(), employer.getCompleteName(), employer.getEmail(), employer.getCompanyName());
