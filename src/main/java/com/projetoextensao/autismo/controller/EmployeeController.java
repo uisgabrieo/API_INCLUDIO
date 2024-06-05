@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projetoextensao.autismo.model.dto.EmployeeFormDTO;
-import com.projetoextensao.autismo.model.dto.RegistrationEmployeeDTO;
-import com.projetoextensao.autismo.model.dto.account.AccountFormDTO;
+import com.projetoextensao.autismo.dto.EmployeeFormDTO;
+import com.projetoextensao.autismo.dto.RegistrationEmployeeDTO;
+import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
 import com.projetoextensao.autismo.service.AccountService;
 import com.projetoextensao.autismo.service.EmployeeService;
@@ -39,8 +39,6 @@ public class EmployeeController {
 		EmployeeFormDTO employeeDTO = fullRegister.employeeDTO();
 		AccountFormDTO accountDTO = fullRegister.accountDTO();
 		
-		System.out.println(employeeDTO);
-		System.out.println(accountDTO);
 		EmployeeAccount employeeSave = service.saveEmployee(accountDTO, employeeDTO);
 		accountService.saveAccount(accountDTO);
 		

@@ -1,4 +1,4 @@
-package com.projetoextensao.autismo.model.dto.account;
+package com.projetoextensao.autismo.dto.account;
 
 import jakarta.validation.constraints.Email;
 

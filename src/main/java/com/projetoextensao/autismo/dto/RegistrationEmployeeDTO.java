@@ -1,6 +1,6 @@
-package com.projetoextensao.autismo.model.dto;
+package com.projetoextensao.autismo.dto;
 
-import com.projetoextensao.autismo.model.dto.account.AccountFormDTO;
+import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 
 import jakarta.validation.Valid;
 

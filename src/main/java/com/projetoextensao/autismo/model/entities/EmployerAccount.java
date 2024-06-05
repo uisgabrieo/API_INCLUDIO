@@ -1,13 +1,17 @@
 package com.projetoextensao.autismo.model.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +40,10 @@ public class EmployerAccount extends Account{
 	private String numberPhone;
 	private String cep;
 	private String description;
+	
+	@Setter(value = AccessLevel.PRIVATE)
+	@DBRef(lazy = true)
+	private List<Post> posts = new ArrayList<>();
 	
 	public EmployerAccount(String completeName, String email, String password, TypeAccount account,
 			String id, LocalDate createdAt, String companyName, String cnpj, String companyEmail, String website,

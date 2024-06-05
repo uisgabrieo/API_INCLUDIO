@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projetoextensao.autismo.model.dto.EmployerFormDTO;
-import com.projetoextensao.autismo.model.dto.RegistrationEmployerDTO;
-import com.projetoextensao.autismo.model.dto.account.AccountFormDTO;
+import com.projetoextensao.autismo.dto.EmployerFormDTO;
+import com.projetoextensao.autismo.dto.RegistrationEmployerDTO;
+import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
 import com.projetoextensao.autismo.service.AccountService;
 import com.projetoextensao.autismo.service.EmployerService;

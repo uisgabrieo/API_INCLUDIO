@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projetoextensao.autismo.model.dto.account.AccountFormDTO;
-import com.projetoextensao.autismo.model.dto.account.AccountLoginDTO;
+import com.projetoextensao.autismo.dto.account.AccountFormDTO;
+import com.projetoextensao.autismo.dto.account.AccountLoginDTO;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
 import com.projetoextensao.autismo.service.AccountService;
 
@@ -45,7 +45,7 @@ public class AccountController {
 		
 		System.out.println(login);
 		Boolean loginValidation = service.valiation(login);
-		System.out.println(loginValidation);
+		
 		if (loginValidation) {
 			return new ResponseEntity<>(loginValidation, HttpStatus.OK);
 		}
