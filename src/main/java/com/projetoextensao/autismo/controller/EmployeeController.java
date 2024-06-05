@@ -42,8 +42,6 @@ public class EmployeeController {
 		EmployeeAccount employeeSave = service.saveEmployee(accountDTO, employeeDTO);
 		accountService.saveAccount(accountDTO);
 		
-		System.out.println(employeeSave);
-		
 		return new ResponseEntity<>(employeeSave, HttpStatus.OK);
 	}
 	

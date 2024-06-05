@@ -43,7 +43,6 @@ public class AccountController {
 	@PostMapping("/login")
 	public ResponseEntity<Boolean> loginAccount(@RequestBody AccountLoginDTO login) {
 		
-		System.out.println(login);
 		Boolean loginValidation = service.valiation(login);
 		
 		if (loginValidation) {
