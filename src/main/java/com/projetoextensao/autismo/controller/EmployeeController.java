@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.dto.employee.EmployeeFormDTO;
-import com.projetoextensao.autismo.dto.employee.EmployeePerfil;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
 import com.projetoextensao.autismo.model.entities.enums.GenderUser;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
