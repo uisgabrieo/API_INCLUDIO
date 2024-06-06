@@ -3,6 +3,7 @@ package com.projetoextensao.autismo.dto;
 import java.time.LocalDate;
 
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projetoextensao.autismo.model.entities.enums.GenderUser;
@@ -17,8 +18,8 @@ public record EmployeeFormDTO(
 		String city, 
 		String cep,
 		String numberPhone,
-		String diagnostic,
-		String photograph,
+		MultipartFile diagnostic,
+		MultipartFile photograph,
 		GenderUser gender) {
 
 }

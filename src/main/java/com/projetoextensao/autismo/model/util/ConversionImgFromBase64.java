@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.util.Base64;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ConversionImgFromBase64 {
 	
-	public static String convertFromBase64(File file) {
+	public static String convertFromBase64(MultipartFile multipartFile) {
 		
 		try {
-			byte[] fileContent = FileUtils.readFileToByteArray(file);
+			byte[] fileContent = multipartFile.getBytes();
 			String encodedFile = Base64.getEncoder().encodeToString(fileContent);
 			return encodedFile;
 		} catch (IOException e) {
