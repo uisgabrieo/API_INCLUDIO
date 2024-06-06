@@ -1,4 +1,4 @@
-package com.projetoextensao.autismo.dto;
+package com.projetoextensao.autismo.dto.employee;
 
 import java.time.LocalDate;
 

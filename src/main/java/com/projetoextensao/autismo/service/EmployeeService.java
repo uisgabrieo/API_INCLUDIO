@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projetoextensao.autismo.dto.EmployeeFormDTO;
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
+import com.projetoextensao.autismo.dto.employee.EmployeeFormDTO;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
-import com.projetoextensao.autismo.model.util.ConversionImgFromBase64;
+import com.projetoextensao.autismo.model.util.ConvertionImgFromBase64;
 import com.projetoextensao.autismo.respository.EmployeeRepository;
 
 @Service
@@ -44,8 +44,8 @@ public class EmployeeService {
 				employeeDTO.city(), 
 				employeeDTO.cep(), 
 				employeeDTO.numberPhone(), 
-				ConversionImgFromBase64.convertFromBase64(employeeDTO.diagnostic()), 
-				ConversionImgFromBase64.convertFromBase64(employeeDTO.photograph()), 
+				ConvertionImgFromBase64.convertFromBase64(employeeDTO.diagnostic()), 
+				ConvertionImgFromBase64.convertFromBase64(employeeDTO.photograph()), 
 				employeeDTO.gender()); 
 		return employee;
 	}

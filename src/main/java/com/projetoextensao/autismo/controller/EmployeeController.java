@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.projetoextensao.autismo.dto.EmployeeFormDTO;
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
+import com.projetoextensao.autismo.dto.employee.EmployeeFormDTO;
+import com.projetoextensao.autismo.dto.employee.EmployeePerfil;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
 import com.projetoextensao.autismo.model.entities.enums.GenderUser;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
@@ -35,25 +36,25 @@ public class EmployeeController {
 	private AccountService accountService;
 	
 	@PostMapping(value = "/register")
-	public ResponseEntity<EmployeeAccount> registerEmployee(@RequestParam("employeeDTO.diagnostic") MultipartFile diagnostic,
-            @RequestParam("employeeDTO.dateOfBirth") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateOfBirth,
-            @RequestParam("employeeDTO.cpf") String cpf,
-            @RequestParam("employeeDTO.country") String country,
-            @RequestParam("employeeDTO.state") String state,
-            @RequestParam("employeeDTO.city") String city,
-            @RequestParam("employeeDTO.cep") String cep,
-            @RequestParam("employeeDTO.numberPhone") String numberPhone,
-            @RequestParam("employeeDTO.photograph") MultipartFile photograph,
-            @RequestParam("employeeDTO.gender") GenderUser gender,
-            @RequestParam("accountDTO.completeName") String completeName,
-            @RequestParam("accountDTO.email") String email,
-            @RequestParam("accountDTO.password") String password,
-            @RequestParam("accountDTO.account") TypeAccount account) {
+	public ResponseEntity<EmployeeAccount> registerEmployee(
+			@RequestParam("diagnostic") MultipartFile diagnostic,
+            @RequestParam("dateOfBirth") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateOfBirth,
+            @RequestParam("cpf") String cpf,
+            @RequestParam("country") String country,
+            @RequestParam("state") String state,
+            @RequestParam("city") String city,
+            @RequestParam("cep") String cep,
+            @RequestParam("numberPhone") String numberPhone,
+            @RequestParam("photograph") MultipartFile photograph,
+            @RequestParam("gender") GenderUser gender,
+            @RequestParam("completeName") String completeName,
+            @RequestParam("email") String email,
+            @RequestParam("password") String password,
+            @RequestParam("account") TypeAccount account) {
+		
 		EmployeeFormDTO employeeDTO = new EmployeeFormDTO(dateOfBirth, cpf, country, state, city, cep, numberPhone, diagnostic, photograph, gender);
         AccountFormDTO accountDTO = new AccountFormDTO(completeName, email, password, account);
-		//AccountFormDTO accountDTO = (AccountFormDTO) session.getAttribute("employeeData");
-//		EmployeeFormDTO employeeDTO = fullRegister.employeeDTO();
-//		AccountFormDTO accountDTO = fullRegister.accountDTO();
+
 		System.out.println(employeeDTO);
 		System.out.println(accountDTO);
 		EmployeeAccount employeeSave = service.saveEmployee(accountDTO, employeeDTO);
@@ -61,6 +62,13 @@ public class EmployeeController {
 		
 		return new ResponseEntity<>(employeeSave, HttpStatus.OK);
 	}
+	
+	
+//	@GetMapping
+//	public ResponseEntity<EmployeePerfil> findEmployee(@RequestParam("email") String email) {
+//		
+//		return null;
+//	}
 	
 	@GetMapping
 	public ResponseEntity<List<EmployeeAccount>> findAll() {

@@ -32,6 +32,7 @@ public class EmployerAccount extends Account{
 	private LocalDate createdAt;
 	private String companyName;
 	private String cnpj;
+	private String logo;
 	private String companyEmail;
 	private String website;
 	private String country;
@@ -46,13 +47,14 @@ public class EmployerAccount extends Account{
 	private List<Post> posts = new ArrayList<>();
 	
 	public EmployerAccount(String completeName, String email, String password, TypeAccount account,
-			String id, LocalDate createdAt, String companyName, String cnpj, String companyEmail, String website,
+			String id, LocalDate createdAt, String companyName, String cnpj, String logo, String companyEmail, String website,
 			String country, String state, String city, String numberPhone, String cep, String description) {
 		super(completeName, email, password, account);
 		this.id = id;
 		this.createdAt = createdAt;
 		this.companyName = companyName;
 		this.cnpj = cnpj;
+		this.logo = logo;
 		this.companyEmail = companyEmail;
 		this.website = website;
 		this.country = country;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.projetoextensao.autismo.dto.EmployerFormDTO;
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
+import com.projetoextensao.autismo.model.util.ConvertionImgFromBase64;
 import com.projetoextensao.autismo.respository.EmployerRepository;
 
 @Service
@@ -28,11 +29,24 @@ public class EmployerService {
 	}
 
 	private EmployerAccount dtoFromEmployerAccount(AccountFormDTO accountDTO, EmployerFormDTO employerDTO) {
-		EmployerAccount employer = new EmployerAccount(accountDTO.completeName(),
-				accountDTO.email(), accountDTO.password(), accountDTO.account(), null, employerDTO.createdAt(),
-				employerDTO.companyName(), employerDTO.cnpj(), employerDTO.companyEmail(), employerDTO.website(),
-				employerDTO.country(), employerDTO.state(), employerDTO.city(), employerDTO.numberPhone(),
-				employerDTO.cep(), employerDTO.description());
+		EmployerAccount employer = new EmployerAccount(
+				accountDTO.completeName(),
+				accountDTO.email(), 
+				accountDTO.password(), 
+				accountDTO.account(), 
+				null, 
+				employerDTO.createdAt(),
+				employerDTO.companyName(), 
+				employerDTO.cnpj(),
+				ConvertionImgFromBase64.convertFromBase64(employerDTO.logo()),
+				employerDTO.companyEmail(), 
+				employerDTO.website(),
+				employerDTO.country(), 
+				employerDTO.state(), 
+				employerDTO.city(), 
+				employerDTO.numberPhone(),
+				employerDTO.cep(), 
+				employerDTO.description());
 		return employer;
 
 	}

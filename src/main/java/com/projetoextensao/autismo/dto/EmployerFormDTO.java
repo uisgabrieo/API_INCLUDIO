@@ -3,6 +3,7 @@ package com.projetoextensao.autismo.dto;
 import java.time.LocalDate;
 
 import org.hibernate.validator.constraints.br.CNPJ;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,6 +18,7 @@ public record EmployerFormDTO(
 		String companyName,
 		@CNPJ(message = "CNPJ inválido")
 		String cnpj,
+		MultipartFile logo,
 		@Email(message = "Email inválido!")
 		String companyEmail,
 		String website,
