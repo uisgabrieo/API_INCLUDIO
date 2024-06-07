@@ -11,5 +11,5 @@ import com.projetoextensao.autismo.model.entities.Account;
 public interface AccountRepository extends MongoRepository<Account, String>{
 
 	Optional<Account> findByEmail(String email);
-	
+
 }

@@ -16,19 +16,44 @@ public class AccountService {
 	@Autowired
 	private AccountRepository repository;
 	
+	@Autowired
+	private EmployeeService employeeService;
+	
 	public Account saveAccount(AccountFormDTO accountDTO) {
 		Account account = dtoFromAccount(accountDTO);
 		Account accountSave = repository.save(account);
 		return accountSave;
 	}
 	
-	public Boolean valiation(AccountLoginDTO login) {
+	public String valiation(AccountLoginDTO login) {
+		System.out.println("SERVICE");
 		Optional<Account> account = repository.findByEmail(login.email());
-		
+		System.out.println("SERVICE:" + account.get());
 		if (account.get().getPassword().equals(login.password())) {
-			return true;
+			String id = searchId(account.get());
+			System.out.println("true");
+			return id;
 		}
-		return false;
+		System.out.println("false");
+		return null;
+	}
+//	public Boolean valiation(AccountLoginDTO login) {
+//		System.out.println("SERVICE");
+//		Optional<Account> account = repository.findByEmail(login.email());
+//		System.out.println("SERVICE:" + account.get());
+//		if (account.get().getPassword().equals(login.password())) {
+//			System.out.println("true");
+//			return true;
+//		}
+//		System.out.println("false");
+//		return false;
+//	}
+	public String searchId(Account obj) {
+		
+		String email = obj.getEmail();
+		String id = employeeService.searchId(email);
+		
+		return id;
 	}
 	
 	private Account dtoFromAccount(AccountFormDTO dto) {

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.dto.employee.EmployeeFormDTO;
+import com.projetoextensao.autismo.dto.employee.EmployeePerfilDTO;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
 import com.projetoextensao.autismo.model.entities.enums.GenderUser;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
@@ -63,11 +65,13 @@ public class EmployeeController {
 	}
 	
 	
-//	@GetMapping
-//	public ResponseEntity<EmployeePerfil> findEmployee(@RequestParam("email") String email) {
-//		
-//		return null;
-//	}
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<EmployeePerfilDTO> findEmployee(@PathVariable String id) {
+		
+		EmployeePerfilDTO employee = service.findById(id);
+		
+		return new ResponseEntity<>(employee, HttpStatus.OK);
+	}
 	
 	@GetMapping
 	public ResponseEntity<List<EmployeeAccount>> findAll() {

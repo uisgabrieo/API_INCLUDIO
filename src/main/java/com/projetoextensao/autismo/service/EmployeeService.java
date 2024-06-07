@@ -1,12 +1,14 @@
 package com.projetoextensao.autismo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.dto.employee.EmployeeFormDTO;
+import com.projetoextensao.autismo.dto.employee.EmployeePerfilDTO;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
 import com.projetoextensao.autismo.model.util.ConvertionImgFromBase64;
 import com.projetoextensao.autismo.respository.EmployeeRepository;
@@ -29,6 +31,33 @@ public class EmployeeService {
 		return employeeAccount;
 	}
 	
+	public EmployeePerfilDTO findById(String id) {
+		Optional<EmployeeAccount> account = repository.findById(id);
+		EmployeePerfilDTO accountPerfil = fromPerfil(account.get());
+		return accountPerfil;
+		
+	}
+	
+
+	public String searchId(String email) {
+		Optional<EmployeeAccount> employee = repository.findByEmail(email);
+		String id = employee.get().getId();
+		return id;
+	}
+	
+	private EmployeePerfilDTO fromPerfil(EmployeeAccount obj) {
+		EmployeePerfilDTO perfil = new EmployeePerfilDTO(
+				obj.getDateOfBirth(), 
+				obj.getCpf(), 
+				obj.getCountry(), 
+				obj.getState(), 
+				obj.getCity(), 
+				obj.getCep(), 
+				obj.getNumberPhone(), 
+				obj.getPhotograph(), 
+				obj.getGender());
+		return perfil;
+	}
 	
 	private EmployeeAccount dtoFromEmployeeAccount(AccountFormDTO accountDTO, EmployeeFormDTO employeeDTO) {
 		EmployeeAccount employee = new EmployeeAccount(
