@@ -47,14 +47,16 @@ public class EmployeeService {
 	
 	private EmployeePerfilDTO fromPerfil(EmployeeAccount obj) {
 		EmployeePerfilDTO perfil = new EmployeePerfilDTO(
-				obj.getDateOfBirth(), 
-				obj.getCpf(), 
+				obj.getCompleteName(),
+				obj.getPassword(),
+				obj.getEmail(),
+				obj.getDateOfBirth(),
 				obj.getCountry(), 
 				obj.getState(), 
 				obj.getCity(), 
 				obj.getCep(), 
 				obj.getNumberPhone(), 
-				obj.getPhotograph(), 
+				ConvertionImgFromBase64.showImage(obj.getPhotograph()), 
 				obj.getGender());
 		return perfil;
 	}

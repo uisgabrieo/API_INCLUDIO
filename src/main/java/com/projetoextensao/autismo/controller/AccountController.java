@@ -43,14 +43,10 @@ public class AccountController {
 	@PostMapping("/login")
 	public ResponseEntity<String> loginAccount(@RequestBody AccountLoginDTO login) {
 
-		System.out.println("Login: " + login.toString());
 		String loginId = service.valiation(login);
-		System.out.println("Validação: " + loginId);
 		if (loginId != null) {
-			System.out.println("Aceito");
 			return new ResponseEntity<>(loginId, HttpStatus.OK);
 		}
-		System.out.println("Reprovado");
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 	}
