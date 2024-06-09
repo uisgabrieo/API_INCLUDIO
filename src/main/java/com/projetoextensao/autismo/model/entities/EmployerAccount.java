@@ -1,24 +1,19 @@
 package com.projetoextensao.autismo.model.entities;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projetoextensao.autismo.model.entities.enums.GenderUser;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Document(collection = "employer_accounts")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,42 +24,30 @@ public class EmployerAccount extends Account{
 	@Id
 	private String id;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	private LocalDate createdAt;
-	private String companyName;
-	private String cnpj;
-	private String logo;
-	private String companyEmail;
-	private String website;
+	private LocalDate dateOfBirth;
+	private String cpf;
 	private String country;
 	private String state;
 	private String city;
-	private String numberPhone;
 	private String cep;
-	private String description;
+	private String numberPhone;
+	private String photograph;
+	private GenderUser gender;
 	
-	@Setter(value = AccessLevel.PRIVATE)
-	@DBRef(lazy = true)
-	private List<Post> posts = new ArrayList<>();
-	
-	public EmployerAccount(String completeName, String email, String password, TypeAccount account,
-			String id, LocalDate createdAt, String companyName, String cnpj, String logo, String companyEmail, String website,
-			String country, String state, String city, String numberPhone, String cep, String description) {
+	public EmployerAccount(String completeName, String email, String password, TypeAccount account, String id,
+			LocalDate dateOfBirth, String cpf, String country, String state, String city, String cep,
+			String numberPhone, String photograph, GenderUser gender) {
 		super(completeName, email, password, account);
 		this.id = id;
-		this.createdAt = createdAt;
-		this.companyName = companyName;
-		this.cnpj = cnpj;
-		this.logo = logo;
-		this.companyEmail = companyEmail;
-		this.website = website;
+		this.dateOfBirth = dateOfBirth;
+		this.cpf = cpf;
 		this.country = country;
 		this.state = state;
 		this.city = city;
-		this.numberPhone = numberPhone;
 		this.cep = cep;
-		this.description = description;
+		this.numberPhone = numberPhone;
+		this.photograph = photograph;
+		this.gender = gender;
 	}
-	
-	
 	
 }

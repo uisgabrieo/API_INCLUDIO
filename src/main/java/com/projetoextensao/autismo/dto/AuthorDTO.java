@@ -1,6 +1,6 @@
 package com.projetoextensao.autismo.dto;
 
-import com.projetoextensao.autismo.model.entities.EmployerAccount;
+import com.projetoextensao.autismo.model.entities.Company;
 import com.projetoextensao.autismo.model.util.ConvertionImgFromBase64;
 
 public record AuthorDTO (
@@ -10,7 +10,7 @@ public record AuthorDTO (
 		String email, 
 		String companyName) {
 	
-	public AuthorDTO(EmployerAccount employer) {
-        this(employer.getId(), ConvertionImgFromBase64.showImage(employer.getLogo()), employer.getCompleteName(), employer.getEmail(), employer.getCompanyName());
+	public AuthorDTO(Company company) {
+        this(company.getEmployer().getId(), ConvertionImgFromBase64.showImage(company.getLogo()), company.getEmployer().getCompleteName(), company.getCompanyEmail(), company.getCompanyName());
     }
 }

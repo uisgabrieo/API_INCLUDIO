@@ -54,8 +54,8 @@ public class EmployeeController {
             @RequestParam("account") TypeAccount account) {
 		
 		EmployeeFormDTO employeeDTO = new EmployeeFormDTO(dateOfBirth, cpf, country, state, city, cep, numberPhone, diagnostic, photograph, gender);
-        AccountFormDTO accountDTO = new AccountFormDTO(completeName, email, password, account);
-
+        AccountFormDTO accountDTO = new AccountFormDTO(completeName, email, password, account);        
+        
 		System.out.println(employeeDTO);
 		System.out.println(accountDTO);
 		EmployeeAccount employeeSave = service.saveEmployee(accountDTO, employeeDTO);

@@ -28,9 +28,12 @@ public class PostService {
 	}
 	
 	public List<Post> filter(String field) {
-		System.out.println(field);
 		List<Post> posts = repository.findByFieldContainingIgnoreCase(field);
-		System.out.println("post: " + posts);
+		return posts;
+	}
+	
+	public List<Post> search(String field) {
+		List<Post> posts = repository.findByRoleContainingIgnoreCase(field);
 		return posts;
 	}
 	

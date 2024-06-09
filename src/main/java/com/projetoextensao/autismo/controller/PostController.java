@@ -43,4 +43,10 @@ public class PostController {
 		return new ResponseEntity<>(posts, HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/search")
+	public ResponseEntity<List<Post>> search(@RequestParam(value = "caixaDeBusca", defaultValue = "") String text) {
+		List<Post> posts = service.search(text);
+		
+		return new ResponseEntity<>(posts, HttpStatus.OK);
+	}
 }

@@ -12,4 +12,6 @@ public interface PostRepository extends MongoRepository<Post, String>{
 
 	List<Post> findByFieldContainingIgnoreCase(String field);
 	
+	List<Post> findByRoleContainingIgnoreCase(String text);
+	
 }
