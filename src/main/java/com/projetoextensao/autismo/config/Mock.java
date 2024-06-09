@@ -44,7 +44,7 @@ public class Mock implements CommandLineRunner{
 		employerRepository.deleteAll();
 		postRepository.deleteAll();
 		
-		Account af1 = new Account("Luis Gabriel", "luisgabriel@gmail.com", "123456", TypeAccount.EMPLOYEE);
+		Account af1 = new Account("Luis GabrielSB", "luisgabriel@gmail.com", "123456", TypeAccount.EMPLOYEE);
 		EmployeeAccount f1 = new EmployeeAccount(
 				"Luis Gabriel", "luisgabriel@gmail.com", "123456", TypeAccount.EMPLOYEE, null, 
 				LocalDate.parse("03/07/2004", fmt), "74797948353", "Brasil", "Piaui", "Teresina", "64000500", 
