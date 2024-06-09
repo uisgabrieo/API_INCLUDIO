@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projetoextensao.autismo.model.entities.Post;
@@ -30,11 +31,16 @@ public class PostController {
 	
 	@GetMapping(value = "{id}")
 	public ResponseEntity<Post> findById(@PathVariable String id) {
-		
 		Post post = service.findById(id);
-		
 		return new ResponseEntity<>(post, HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/filter")
+	public ResponseEntity<List<Post>> filter(@RequestParam(value = "caixaDeFiltro", defaultValue = "") String field) {
+		System.out.println(field);
+		List<Post> posts = service.filter(field);
+		
+		return new ResponseEntity<>(posts, HttpStatus.OK);
+	}
 	
 }

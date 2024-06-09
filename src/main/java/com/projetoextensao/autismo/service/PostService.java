@@ -27,4 +27,11 @@ public class PostService {
 		return post.get();
 	}
 	
+	public List<Post> filter(String field) {
+		System.out.println(field);
+		List<Post> posts = repository.findByFieldContainingIgnoreCase(field);
+		System.out.println("post: " + posts);
+		return posts;
+	}
+	
 }
