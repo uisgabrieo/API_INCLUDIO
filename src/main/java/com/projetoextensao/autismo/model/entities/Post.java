@@ -10,16 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.projetoextensao.autismo.dto.AuthorDTO;
 import com.projetoextensao.autismo.model.entities.enums.JobType;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
 @Document(collection = "posts")
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
 public class Post {
 	
 	@Id
