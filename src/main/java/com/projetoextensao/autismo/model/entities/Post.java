@@ -42,5 +42,83 @@ public class Post {
 		this.requirements = requirements;
 		this.author = author;
 	}
+
+	public Post(String id, String role, JobType jobType, LocalDate createAt, String description, String requirements,
+			List<String> field, AuthorDTO author) {
+		this.id = id;
+		this.role = role;
+		this.jobType = jobType;
+		this.createAt = createAt;
+		this.description = description;
+		this.requirements = requirements;
+		this.field = field;
+		this.author = author;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public JobType getJobType() {
+		return jobType;
+	}
+
+	public void setJobType(JobType jobType) {
+		this.jobType = jobType;
+	}
+
+	public LocalDate getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(LocalDate createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRequirements() {
+		return requirements;
+	}
+
+	public void setRequirements(String requirements) {
+		this.requirements = requirements;
+	}
+
+	public List<String> getField() {
+		return field;
+	}
+
+	public void setField(List<String> field) {
+		this.field = field;
+	}
+
+	public AuthorDTO getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(AuthorDTO author) {
+		this.author = author;
+	}
+	
+	
 	
 }
