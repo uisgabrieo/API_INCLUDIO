@@ -1,11 +1,14 @@
 package com.projetoextensao.autismo.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projetoextensao.autismo.dto.CompanyFormDTO;
-import com.projetoextensao.autismo.dto.EmployerFormDTO;
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
+import com.projetoextensao.autismo.dto.company.CompanyFormDTO;
+import com.projetoextensao.autismo.dto.company.CompanyPerfilDTO;
+import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
 import com.projetoextensao.autismo.model.entities.Company;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
 import com.projetoextensao.autismo.model.util.ConvertionImgFromBase64;
@@ -16,6 +19,9 @@ public class CompanyService {
 
 	@Autowired
 	private CompanyRepository repository;
+	
+	@Autowired
+	private EmployerService employerService;
 
 	public Company saveCompany(AccountFormDTO accountDTO, EmployerFormDTO employerDTO, CompanyFormDTO companyDTO) {
 		Company company = dtoFromCompany(accountDTO, employerDTO, companyDTO);
@@ -23,6 +29,32 @@ public class CompanyService {
 		return companySave;
 	}
 
+	public Company findById(String  id) {
+		System.out.println(id);
+		EmployerAccount employer = employerService.findById(id);
+		System.out.println(employer);
+		Optional<Company> company = repository.findByEmployer(employer);
+		System.out.println(company.get());
+		return company.get();
+	}
+	
+	public CompanyPerfilDTO fromCompanyPerfil(Company obj) {
+		CompanyPerfilDTO company = new CompanyPerfilDTO(
+				employerService.fromPerfil(obj.getEmployer()),
+				obj.getCreatedAt(),
+				obj.getCompanyName(),
+				obj.getLogo(),
+				obj.getWebsite(),
+				obj.getCountry(),
+				obj.getState(),
+				obj.getCity(),
+				obj.getNumberPhone(), 
+				obj.getCep(),
+				obj.getDescription());
+		System.out.println(company);
+		return company;
+	}
+	
 	private Company dtoFromCompany(AccountFormDTO accountDTO, EmployerFormDTO employerDTO, CompanyFormDTO companyDTO) {
 		EmployerAccount employer = new EmployerAccount(
 				accountDTO.completeName(), 

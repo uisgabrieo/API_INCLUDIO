@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.dto.account.AccountLoginDTO;
+import com.projetoextensao.autismo.dto.account.AccountResponseDTO;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
 import com.projetoextensao.autismo.service.AccountService;
 
@@ -41,9 +42,9 @@ public class AccountController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> loginAccount(@RequestBody AccountLoginDTO login) {
+	public ResponseEntity<AccountResponseDTO> loginAccount(@RequestBody AccountLoginDTO login) {
 
-		String loginId = service.valiation(login);
+		AccountResponseDTO loginId = service.valiation(login);
 		if (loginId != null) {
 			return new ResponseEntity<>(loginId, HttpStatus.OK);
 		}

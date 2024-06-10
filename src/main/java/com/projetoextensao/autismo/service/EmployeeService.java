@@ -40,6 +40,7 @@ public class EmployeeService {
 	
 
 	public String searchId(String email) {
+		System.out.println("Email: Search: " + email);
 		Optional<EmployeeAccount> employee = repository.findByEmail(email);
 		String id = employee.get().getId();
 		return id;

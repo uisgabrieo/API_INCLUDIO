@@ -1,8 +1,9 @@
-package com.projetoextensao.autismo.dto;
+package com.projetoextensao.autismo.dto.company;
 
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
 
 public record CompanyFormDTO (
 		EmployerFormDTO employer,

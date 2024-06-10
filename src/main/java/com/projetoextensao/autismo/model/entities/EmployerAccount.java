@@ -3,6 +3,7 @@ package com.projetoextensao.autismo.model.entities;
 import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projetoextensao.autismo.model.entities.enums.GenderUser;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Document(collection = "employer_accounts")
 @Getter
 @Setter
 @AllArgsConstructor
