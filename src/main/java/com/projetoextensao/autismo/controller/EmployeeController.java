@@ -38,22 +38,26 @@ public class EmployeeController {
 	
 	@PostMapping(value = "/register")
 	public ResponseEntity<EmployeeAccount> registerEmployee(
-			@RequestParam("diagnostic") MultipartFile diagnostic,
-            @RequestParam("dateOfBirth") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateOfBirth,
-            @RequestParam("cpf") String cpf,
+			@RequestParam("completeName") String completeName,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+            @RequestParam("account") TypeAccount account,
             @RequestParam("country") String country,
             @RequestParam("state") String state,
             @RequestParam("city") String city,
             @RequestParam("cep") String cep,
+            @RequestParam("complement") String complement,
+            @RequestParam("cpf") String cpf,
             @RequestParam("numberPhone") String numberPhone,
+            @RequestParam("sector") String sector,
+            @RequestParam("training") String training,
+            @RequestParam("institution") String institution,
+            @RequestParam("dateOfBirth") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateOfBirth,
             @RequestParam("photograph") MultipartFile photograph,
-            @RequestParam("gender") GenderUser gender,
-            @RequestParam("completeName") String completeName,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password,
-            @RequestParam("account") TypeAccount account) {
+			@RequestParam("diagnostic") MultipartFile diagnostic,
+            @RequestParam("gender") GenderUser gender) {
 		
-		EmployeeFormDTO employeeDTO = new EmployeeFormDTO(dateOfBirth, cpf, country, state, city, cep, numberPhone, diagnostic, photograph, gender);
+		EmployeeFormDTO employeeDTO = new EmployeeFormDTO(country, state, city, cep, complement, cpf, numberPhone, sector, training, institution, dateOfBirth, gender, diagnostic, photograph);
         AccountFormDTO accountDTO = new AccountFormDTO(completeName, email, password, account);        
         
 		System.out.println(employeeDTO);

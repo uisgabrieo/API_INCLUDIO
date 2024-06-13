@@ -69,16 +69,20 @@ public class EmployeeService {
 				accountDTO.password(), 
 				accountDTO.account(),
 				null, 
-				employeeDTO.dateOfBirth(), 
-				employeeDTO.cpf(), 
 				employeeDTO.country(), 
 				employeeDTO.state(), 
 				employeeDTO.city(), 
 				employeeDTO.cep(), 
+				employeeDTO.complement(),
+				employeeDTO.cpf(), 
 				employeeDTO.numberPhone(), 
+				employeeDTO.sector(),
+				employeeDTO.training(),
+				employeeDTO.institution(),
+				employeeDTO.dateOfBirth(), 
+				employeeDTO.gender(), 
 				ConvertionImgFromBase64.convertFromBase64(employeeDTO.diagnostic()), 
-				ConvertionImgFromBase64.convertFromBase64(employeeDTO.photograph()), 
-				employeeDTO.gender()); 
+				ConvertionImgFromBase64.convertFromBase64(employeeDTO.photograph()));
 		return employee;
 	}
 }

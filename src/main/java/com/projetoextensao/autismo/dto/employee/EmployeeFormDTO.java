@@ -10,16 +10,21 @@ import com.projetoextensao.autismo.model.entities.enums.GenderUser;
 
 public record EmployeeFormDTO(
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-		LocalDate dateOfBirth, 
-		@CPF(message = "Insira um CPF válido!")
-		String cpf, 
 		String country, 
 		String state, 
 		String city, 
 		String cep,
+		String complement,
+		@CPF
+		String cpf, 
 		String numberPhone,
+		String sector,
+		String training,
+		String institution,
+		LocalDate dateOfBirth, 
+		GenderUser gender,
 		MultipartFile diagnostic,
-		MultipartFile photograph,
-		GenderUser gender) {
+		MultipartFile photograph
+		) {
 
 }
