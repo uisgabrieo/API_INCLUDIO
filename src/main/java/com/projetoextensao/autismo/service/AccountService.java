@@ -31,30 +31,22 @@ public class AccountService {
 	}
 	
 	public AccountResponseDTO valiation(AccountLoginDTO login) {
-		System.out.println(login);
 		Optional<Account> account = repository.findByEmail(login.email());
-		System.out.println("account: " + account );
 		if (account.get().getPassword().equals(login.password())) {
 			AccountResponseDTO accountResponse = searchId(account.get());
-			System.out.println(accountResponse);
 			return accountResponse;
 		}
 		return null;
 	}
 
 	public AccountResponseDTO searchId(Account obj) {
-		System.out.println("Antes do get: " + obj);
 		String email = obj.getEmail();
-		System.out.println("Email: " + email);
 		if (obj.getAccount().equals(TypeAccount.EMPLOYEE)) {
 			String id = employeeService.searchId(email);	
-			System.out.println("id: " + id);
 			AccountResponseDTO account = new AccountResponseDTO(id, obj.getAccount());
 			return account;
 		} else if (obj.getAccount().equals(TypeAccount.EMPLOYER)) {
-			System.out.println("id Employer entrou ");
 			String id = employerService.searchId(email);
-			System.out.println("id: " + id );
 			AccountResponseDTO account = new AccountResponseDTO(id, obj.getAccount());
 			return account;
 		}

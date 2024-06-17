@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
 import com.projetoextensao.autismo.dto.employer.EmployerPerfilDTO;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
@@ -23,6 +24,15 @@ public class EmployerService {
 		
 		return employerSave;
 	}
+	
+	public String saveEmployer(EmployerFormDTO employerDTO, AccountFormDTO accountFormDTO) {
+		EmployerAccount employer = dtoFromEmployer(employerDTO, accountFormDTO);
+		EmployerAccount employerSave = repository.save(employer);
+		String id = employerSave.getId();
+		return id;
+	}
+	
+	
 	
 	public EmployerAccount findById(String id) {	
 		Optional<EmployerAccount> account = repository.findById(id);
@@ -57,35 +67,37 @@ public class EmployerService {
 	private EmployerAccount dtoFromEmployer(EmployerFormDTO obj) {
 		EmployerAccount employer = new EmployerAccount(
 				obj.id(),
-				obj.dateOfBirth(),
-				obj.cpf(),
 				obj.country(),
 				obj.state(),
 				obj.city(),
 				obj.cep(),
+				obj.complement(),
+				obj.cpf(),
 				obj.numberPhone(),
+				obj.jobTitle(),
+				obj.dateOfBirth(),
 				ConvertionImgFromBase64.convertFromBase64(obj.photograph()),
 				obj.gender());
 		return employer;
 	}
-//	
-//	private EmployerAccount dtoFromEmployerAccount(AccountFormDTO accountDTO, EmployerFormDTO employerDTO) {
-//		EmployerAccount employer = new EmployerAccount(
-//				accountDTO.completeName(), 
-//				accountDTO.email(), 
-//				accountDTO.password(), 
-//				accountDTO.account(),
-//				null, 
-//				employerDTO.dateOfBirth(), 
-//				employerDTO.cpf(), 
-//				employerDTO.country(), 
-//				employerDTO.state(), 
-//				employerDTO.city(), 
-//				employerDTO.cep(), 
-//				employerDTO.numberPhone(), 
-//				ConvertionImgFromBase64.convertFromBase64(employerDTO.diagnostic()), 
-//				ConvertionImgFromBase64.convertFromBase64(employerDTO.photograph()), 
-//				employerDTO.gender()); 
-//		return employer;
-//	}
+	private EmployerAccount dtoFromEmployer(EmployerFormDTO obj, AccountFormDTO acc) {
+		EmployerAccount employer = new EmployerAccount(
+				acc.completeName(), 
+				acc.email(), 
+				acc.password(), 
+				acc.account(),
+				obj.id(),
+				obj.country(),
+				obj.state(),
+				obj.city(),
+				obj.cep(),
+				obj.complement(),
+				obj.cpf(),
+				obj.numberPhone(),
+				obj.jobTitle(),
+				obj.dateOfBirth(),
+				ConvertionImgFromBase64.convertFromBase64(obj.photograph()),
+				obj.gender());
+		return employer;
+	}
 }

@@ -2,23 +2,28 @@ package com.projetoextensao.autismo.dto.company;
 
 import java.time.LocalDate;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
+import com.projetoextensao.autismo.model.entities.EmployerAccount;
 
 public record CompanyFormDTO (
-		EmployerFormDTO employer,
-		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-		LocalDate createdAt,
+		EmployerAccount employer,
+		MultipartFile logo,
 		String companyName,
-		String cnpj,
-		String logo,
 		String companyEmail,
-		String website,
 		String country,
 		String state,
 		String city,
-		String numberPhone,
 		String cep,
+		String neighborhood,
+		String street,
+		String numCompany,
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+		LocalDate createdAt,
+		String cnpj,
+		String website,
+		String numberPhone,
 		String description){
 
 }

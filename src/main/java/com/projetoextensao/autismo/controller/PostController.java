@@ -45,6 +45,7 @@ public class PostController {
 	
 	@GetMapping(value = "/search")
 	public ResponseEntity<List<Post>> search(@RequestParam(value = "caixaDeBusca", defaultValue = "") String text) {
+		System.out.println(text);
 		List<Post> posts = service.search(text);
 		
 		return new ResponseEntity<>(posts, HttpStatus.OK);

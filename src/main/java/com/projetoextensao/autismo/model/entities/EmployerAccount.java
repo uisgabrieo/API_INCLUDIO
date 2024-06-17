@@ -14,48 +14,55 @@ public class EmployerAccount extends Account{
 	
 	@Id
 	private String id;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	private LocalDate dateOfBirth;
-	private String cpf;
 	private String country;
 	private String state;
 	private String city;
 	private String cep;
+	private String complement;
+	private String cpf;
 	private String numberPhone;
+	private String jobTitle;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private LocalDate dateOfBirth;
 	private String photograph;
 	private GenderUser gender;
-	
 	public EmployerAccount(String completeName, String email, String password, TypeAccount account, String id,
-			LocalDate dateOfBirth, String cpf, String country, String state, String city, String cep,
-			String numberPhone, String photograph, GenderUser gender) {
+			String country, String state, String city, String cep, String complement, String cpf, String numberPhone,
+			String jobTitle, LocalDate dateOfBirth, String photograph, GenderUser gender) {
 		super(completeName, email, password, account);
 		this.id = id;
-		this.dateOfBirth = dateOfBirth;
-		this.cpf = cpf;
 		this.country = country;
 		this.state = state;
 		this.city = city;
 		this.cep = cep;
+		this.complement = complement;
+		this.cpf = cpf;
 		this.numberPhone = numberPhone;
+		this.jobTitle = jobTitle;
+		this.dateOfBirth = dateOfBirth;
 		this.photograph = photograph;
 		this.gender = gender;
 	}
-
-	public EmployerAccount(String id, LocalDate dateOfBirth, String cpf, String country, String state, String city,
-			String cep, String numberPhone, String photograph, GenderUser gender) {
+	
+	public EmployerAccount(String id, String country, String state, String city, String cep, String complement,
+			String cpf, String numberPhone, String jobTitle, LocalDate dateOfBirth, String photograph,
+			GenderUser gender) {
 		this.id = id;
-		this.dateOfBirth = dateOfBirth;
-		this.cpf = cpf;
 		this.country = country;
 		this.state = state;
 		this.city = city;
 		this.cep = cep;
+		this.complement = complement;
+		this.cpf = cpf;
 		this.numberPhone = numberPhone;
+		this.jobTitle = jobTitle;
+		this.dateOfBirth = dateOfBirth;
 		this.photograph = photograph;
 		this.gender = gender;
 	}
 
 	public EmployerAccount() {
+		
 	}
 
 	public String getId() {
@@ -64,22 +71,6 @@ public class EmployerAccount extends Account{
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
 	}
 
 	public String getCountry() {
@@ -114,12 +105,44 @@ public class EmployerAccount extends Account{
 		this.cep = cep;
 	}
 
+	public String getComplement() {
+		return complement;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public String getNumberPhone() {
 		return numberPhone;
 	}
 
 	public void setNumberPhone(String numberPhone) {
 		this.numberPhone = numberPhone;
+	}
+
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getPhotograph() {

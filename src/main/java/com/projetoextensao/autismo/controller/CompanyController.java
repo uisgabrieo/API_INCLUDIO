@@ -14,13 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.dto.company.CompanyFormDTO;
-import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
 import com.projetoextensao.autismo.model.entities.Company;
-import com.projetoextensao.autismo.model.entities.enums.GenderUser;
-import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
-import com.projetoextensao.autismo.service.AccountService;
+import com.projetoextensao.autismo.model.entities.EmployerAccount;
 import com.projetoextensao.autismo.service.CompanyService;
 import com.projetoextensao.autismo.service.EmployerService;
 
@@ -34,47 +30,32 @@ public class CompanyController {
 	private CompanyService service;
 	
 	@Autowired
-	private AccountService accountService;
-	
-	@Autowired
 	private EmployerService employerService;
 	
 	@PostMapping(value = "/register")
 	public ResponseEntity<Company> registerEmployer(
-            @RequestParam("dateOfBirth") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateOfBirth,
-            @RequestParam("cpf") String cpf,
-            @RequestParam("country") String country,
-            @RequestParam("state") String state,
-            @RequestParam("city") String city,
-            @RequestParam("cep") String cep,
-            @RequestParam("numberPhone") String numberPhone,
-            @RequestParam("photograph") MultipartFile photograph,
-            @RequestParam("gender") GenderUser gender,
-            @RequestParam("completeName") String completeName,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password,
-            @RequestParam("account") TypeAccount account,
-            @RequestParam("createdAt") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate createdAt,
+			@RequestParam("idEmployer") String id,
+            @RequestParam("logo") MultipartFile logo,
             @RequestParam("companyName") String companyName,
+            @RequestParam("companyEmail") String companyEmail,
+            @RequestParam("country") String countryCompany,
+            @RequestParam("state") String stateCompany,
+            @RequestParam("city") String cityCompany,
+            @RequestParam("cep") String cepCompany,
+            @RequestParam("neighborhood") String neighborhoodCompany,
+            @RequestParam("street") String street,
+            @RequestParam("numCompany") String numCompany,
+            @RequestParam("createdAt") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate createdAt,
             @RequestParam("cnpj") String cnpj,
-            @RequestParam("logo") String logo,
-            @RequestParam("companyName") String companyEmail,
             @RequestParam("website") String website,
-            @RequestParam("countryCompany") String countryCompany,
-            @RequestParam("stateCompany") String stateCompany,
-            @RequestParam("cityCompany") String cityCompany,
-            @RequestParam("numberPhoneCompany") String numberPhoneCompany,
-            @RequestParam("cepCompany") String cepCompany,
+            @RequestParam("numberPhone") String numberPhoneCompany,
             @RequestParam("desciption") String description) {
 		
-		EmployerFormDTO employerDTO = new EmployerFormDTO(null, dateOfBirth, cpf, country, state, city, cep, numberPhone, photograph, gender);
-		AccountFormDTO accountDTO = new AccountFormDTO(completeName, companyEmail, password, account);
-		CompanyFormDTO companyDTO = new CompanyFormDTO(null, dateOfBirth, password, cpf, completeName, email, email, country, state, city, numberPhone, cep, password);
+		EmployerAccount employer = employerService.findById(id);
+		CompanyFormDTO companyDTO = new CompanyFormDTO(employer, logo, companyName, companyEmail, countryCompany, stateCompany, cityCompany, cepCompany, neighborhoodCompany, street, numCompany, createdAt, cnpj, website, numberPhoneCompany, description);
 
-		Company companySave	 = service.saveCompany(accountDTO, employerDTO, companyDTO);
-		
-		accountService.saveAccount(accountDTO);
-		employerService.saveEmployer(employerDTO);
+		Company companySave	 = service.saveCompany(companyDTO);
+		;
 		return new ResponseEntity<>(companySave, HttpStatus.OK);
 	}
 	

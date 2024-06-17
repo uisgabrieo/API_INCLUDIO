@@ -5,10 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.dto.company.CompanyFormDTO;
 import com.projetoextensao.autismo.dto.company.CompanyPerfilDTO;
-import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
 import com.projetoextensao.autismo.model.entities.Company;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
 import com.projetoextensao.autismo.model.util.ConvertionImgFromBase64;
@@ -23,8 +21,8 @@ public class CompanyService {
 	@Autowired
 	private EmployerService employerService;
 
-	public Company saveCompany(AccountFormDTO accountDTO, EmployerFormDTO employerDTO, CompanyFormDTO companyDTO) {
-		Company company = dtoFromCompany(accountDTO, employerDTO, companyDTO);
+	public Company saveCompany(CompanyFormDTO companyDTO) {
+		Company company = dtoFromCompany(companyDTO);
 		Company companySave = repository.save(company);
 		return companySave;
 	}
@@ -55,39 +53,26 @@ public class CompanyService {
 		return company;
 	}
 	
-	private Company dtoFromCompany(AccountFormDTO accountDTO, EmployerFormDTO employerDTO, CompanyFormDTO companyDTO) {
-		EmployerAccount employer = new EmployerAccount(
-				accountDTO.completeName(), 
-				accountDTO.email(), 
-				accountDTO.password(), 
-				accountDTO.account(),
-				null, 
-				employerDTO.dateOfBirth(), 
-				employerDTO.cpf(), 
-				employerDTO.country(), 
-				employerDTO.state(), 
-				employerDTO.city(), 
-				employerDTO.cep(), 
-				employerDTO.numberPhone(),  
-				ConvertionImgFromBase64.convertFromBase64(employerDTO.photograph()), 
-				employerDTO.gender()
-				);
+	private Company dtoFromCompany(CompanyFormDTO companyDTO) {
 		Company company = new Company(
 				null, 
-				employer, 
-				companyDTO.createdAt(), 
+				companyDTO.employer(), 
+				ConvertionImgFromBase64.convertFromBase64(companyDTO.logo()), 
 				companyDTO.companyName(), 
-				companyDTO.cnpj(), 
-				companyDTO.logo(), 
 				companyDTO.companyEmail(), 
-				companyDTO.website(),
 				companyDTO.country(), 
 				companyDTO.state(), 
 				companyDTO.city(), 
-				companyDTO.numberPhone(), 
 				companyDTO.cep(), 
+				companyDTO.neighborhood(),
+				companyDTO.street(),
+				companyDTO.numCompany(),
+				companyDTO.createdAt(), 
+				companyDTO.cnpj(), 
+				companyDTO.website(),
+				companyDTO.numberPhone(), 
 				companyDTO.description());
-		return company;
+		return company;	
 
 	}
 

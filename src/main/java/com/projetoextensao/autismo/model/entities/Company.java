@@ -8,74 +8,57 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import lombok.AccessLevel;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;	
 
 @Document(collection = "company")
 public class Company{
-	
 	@Id
 	private String id;
 	private EmployerAccount employer;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	private LocalDate createdAt;
-	private String companyName;
-	private String cnpj;
 	private String logo;
+	private String companyName;
 	private String companyEmail;
-	private String website;
 	private String country;
 	private String state;
 	private String city;
-	private String numberPhone;
 	private String cep;
+	private String neighborhood;
+	private String street;
+	private String numCompany;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private LocalDate createdAt;
+	private String cnpj;
+	private String website;
+	private String numberPhone;
 	private String description;
-	
-	@Setter(value = AccessLevel.PRIVATE)
+
 	@DBRef(lazy = true)
 	private List<Post> posts = new ArrayList<>();
-	
-	public Company(String id, EmployerAccount employer, LocalDate createdAt, String companyName, String cnpj, String logo, String companyEmail, String website,
-			String country, String state, String city, String numberPhone, String cep, String description) {
-		this.id = id;
-		this.employer = employer;
-		this.createdAt = createdAt;
-		this.companyName = companyName;
-		this.cnpj = cnpj;
-		this.logo = logo;
-		this.companyEmail = companyEmail;
-		this.website = website;
-		this.country = country;
-		this.state = state;
-		this.city = city;
-		this.numberPhone = numberPhone;
-		this.cep = cep;
-		this.description = description;
-	}
 
-	public Company(String id, EmployerAccount employer, LocalDate createdAt, String companyName, String cnpj,
-			String logo, String companyEmail, String website, String country, String state, String city,
-			String numberPhone, String cep, String description, List<Post> posts) {
+	public Company(String id, EmployerAccount employer, String logo, String companyName, String companyEmail,
+			String country, String state, String city, String cep, String neighborhood, String street,
+			String numCompany, LocalDate createdAt, String cnpj, String website, String numberPhone, String description) {
 		this.id = id;
 		this.employer = employer;
-		this.createdAt = createdAt;
-		this.companyName = companyName;
-		this.cnpj = cnpj;
 		this.logo = logo;
+		this.companyName = companyName;
 		this.companyEmail = companyEmail;
-		this.website = website;
 		this.country = country;
 		this.state = state;
 		this.city = city;
-		this.numberPhone = numberPhone;
 		this.cep = cep;
+		this.neighborhood = neighborhood;
+		this.street = street;
+		this.numCompany = numCompany;
+		this.createdAt = createdAt;
+		this.cnpj = cnpj;
+		this.website = website;
+		this.numberPhone = numberPhone;
 		this.description = description;
-		this.posts = posts;
 	}
 
 	public Company() {
+		
 	}
 
 	public String getId() {
@@ -94,12 +77,12 @@ public class Company{
 		this.employer = employer;
 	}
 
-	public LocalDate getCreatedAt() {
-		return createdAt;
+	public String getLogo() {
+		return logo;
 	}
 
-	public void setCreatedAt(LocalDate createdAt) {
-		this.createdAt = createdAt;
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 
 	public String getCompanyName() {
@@ -110,36 +93,12 @@ public class Company{
 		this.companyName = companyName;
 	}
 
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public String getLogo() {
-		return logo;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
-
 	public String getCompanyEmail() {
 		return companyEmail;
 	}
 
 	public void setCompanyEmail(String companyEmail) {
 		this.companyEmail = companyEmail;
-	}
-
-	public String getWebsite() {
-		return website;
-	}
-
-	public void setWebsite(String website) {
-		this.website = website;
 	}
 
 	public String getCountry() {
@@ -166,20 +125,68 @@ public class Company{
 		this.city = city;
 	}
 
-	public String getNumberPhone() {
-		return numberPhone;
-	}
-
-	public void setNumberPhone(String numberPhone) {
-		this.numberPhone = numberPhone;
-	}
-
 	public String getCep() {
 		return cep;
 	}
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+	public String getNeighborhood() {
+		return neighborhood;
+	}
+
+	public void setNeighborhood(String neighborhood) {
+		this.neighborhood = neighborhood;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getNumCompany() {
+		return numCompany;
+	}
+
+	public void setNumCompany(String numCompany) {
+		this.numCompany = numCompany;
+	}
+
+	public LocalDate getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDate createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public String getNumberPhone() {
+		return numberPhone;
+	}
+
+	public void setNumberPhone(String numberPhone) {
+		this.numberPhone = numberPhone;
 	}
 
 	public String getDescription() {
@@ -193,7 +200,6 @@ public class Company{
 	public List<Post> getPosts() {
 		return posts;
 	}
-	
 	
 	
 }

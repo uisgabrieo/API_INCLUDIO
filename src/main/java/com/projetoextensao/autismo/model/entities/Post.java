@@ -20,30 +20,45 @@ public class Post {
 	private LocalDate createAt;
 	private String description;
 	private String requirements;
+	private String country;
+	private String state;
+	private String city;
 	private List<String> field = new ArrayList<>();
 	
-	private AuthorDTO author; 
-	
-	public Post (String id, String role, JobType jobType, LocalDate createAt, String decription, String requirements, AuthorDTO author) {
-		this.id = id;
-		this.role = role;
-		this.jobType = jobType;
-		this.createAt = createAt;
-		this.description = decription;
-		this.requirements = requirements;
-		this.author = author;
-	}
+	private AuthorDTO author;
 
 	public Post(String id, String role, JobType jobType, LocalDate createAt, String description, String requirements,
-			List<String> field, AuthorDTO author) {
+			String country, String state, String city, List<String> field, AuthorDTO author) {
 		this.id = id;
 		this.role = role;
 		this.jobType = jobType;
 		this.createAt = createAt;
 		this.description = description;
 		this.requirements = requirements;
+		this.country = country;
+		this.state = state;
+		this.city = city;
 		this.field = field;
 		this.author = author;
+	}
+
+	public Post(String id, String role, JobType jobType, LocalDate createAt, String description, String requirements,
+			String country, String state, String city, AuthorDTO author) {
+		super();
+		this.id = id;
+		this.role = role;
+		this.jobType = jobType;
+		this.createAt = createAt;
+		this.description = description;
+		this.requirements = requirements;
+		this.country = country;
+		this.state = state;
+		this.city = city;
+		this.author = author;
+	}
+	
+	public Post() {
+		
 	}
 
 	public String getId() {
@@ -94,6 +109,30 @@ public class Post {
 		this.requirements = requirements;
 	}
 
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	public List<String> getField() {
 		return field;
 	}
@@ -108,8 +147,7 @@ public class Post {
 
 	public void setAuthor(AuthorDTO author) {
 		this.author = author;
-	}
-	
+	} 
 	
 	
 }
