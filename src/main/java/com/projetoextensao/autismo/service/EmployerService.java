@@ -41,7 +41,6 @@ public class EmployerService {
 	}
 	
 	public String searchId(String email) {
-		System.out.println("Email Employer Erro(antes)");
 		Optional<EmployerAccount> employer = repository.findByEmail(email);
 		System.out.println(employer);
 		String id = employer.get().getId();

@@ -77,8 +77,8 @@ public class Mock implements CommandLineRunner{
 		employerRepository.save(e1);
 		companyRepository.save(c1);
 		
-		Post p1 = new Post(null, "Dev back-end", JobType.REMOTE, LocalDate.now(), "Vaga para desenvolvedor back-end","Saber Spring, Java 8+", "Brasil", "Piaui", "Teresina", new AuthorDTO(c1));
-		Post p2 = new Post(null, "Secretário(a)", JobType.IN_PRESON, LocalDate.now(), "Vaga para secretário(a) de clínica psiquiatrica", "Habilidade com o público", "Brasil", "Piaui", "Teresina", new AuthorDTO(c1));
+		Post p1 = new Post(null, "Dev back-end", JobType.REMOTO, LocalDate.now(), "Vaga para desenvolvedor back-end","Saber Spring, Java 8+", "Brasil", "Piaui", "Teresina", new AuthorDTO(c1));
+		Post p2 = new Post(null, "Secretário(a)", JobType.PRESENCIAL, LocalDate.now(), "Vaga para secretário(a) de clínica psiquiatrica", "Habilidade com o público", "Brasil", "Piaui", "Teresina", new AuthorDTO(c1));
 
 		p1.getField().addAll(Arrays.asList("Tecnologia", "Contabiliades"));
 		p2.getField().addAll(Arrays.asList("Livre"));

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.projetoextensao.autismo.dto.company.CompanyFormDTO;
+import com.projetoextensao.autismo.dto.company.CompanyPerfilDTO;
 import com.projetoextensao.autismo.model.entities.Company;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
 import com.projetoextensao.autismo.service.CompanyService;
@@ -60,9 +61,9 @@ public class CompanyController {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Company> findById(@RequestParam String id) {
+	public ResponseEntity<CompanyPerfilDTO> findById(@RequestParam String id) {
 
-		Company company = service.findById(id);
+		CompanyPerfilDTO company = service.findById(id);
 		
 		return new ResponseEntity<>(company, HttpStatus.OK);
 	}

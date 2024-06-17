@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projetoextensao.autismo.dto.AuthorDTO;
+import com.projetoextensao.autismo.dto.PostFormDTO;
+import com.projetoextensao.autismo.dto.company.CompanyPerfilDTO;
 import com.projetoextensao.autismo.model.entities.Post;
 import com.projetoextensao.autismo.respository.PostRepository;
 
@@ -14,6 +17,12 @@ public class PostService {
 
 	@Autowired
 	private PostRepository repository;
+	
+	@Autowired
+	private CompanyService companyService;
+	
+	@Autowired
+	private EmployerService employerService;
 	
 	public List<Post> findAll() {
 		List<Post> posts = repository.findAll();
@@ -37,6 +46,39 @@ public class PostService {
 		List<Post> posts = repository.findByRoleContainingIgnoreCase(text);
 		System.out.println(posts);
 		return posts;
+	}
+	
+	public Post savePost(PostFormDTO postDTO, String email) {
+		System.out.println(postDTO);
+		System.out.println(email);
+		String id = employerService.searchId(email);
+		CompanyPerfilDTO company = companyService.findById(id);
+		System.out.println(company);
+		Post postCreated = createPost(postDTO, company);
+		Post post = repository.save(postCreated);
+		System.out.println(post);
+		return post;
+	}
+
+	private Post createPost(PostFormDTO postDTO, CompanyPerfilDTO company) {
+		Post post = new Post(
+				null,
+				postDTO.role(),
+				postDTO.jobType(),
+				postDTO.createAt(),
+				postDTO.description(),
+				postDTO.requirements(), 
+				postDTO.country(),
+				postDTO.state(),
+				postDTO.city(),
+				postDTO.field(),
+				new AuthorDTO(
+						company.logo(),
+						company.employer().completeName(),
+						company.email(),
+						company.companyName())
+				);
+		return post;
 	}
 	
 }

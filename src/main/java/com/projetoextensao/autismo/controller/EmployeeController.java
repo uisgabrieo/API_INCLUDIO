@@ -1,7 +1,6 @@
 package com.projetoextensao.autismo.controller;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -75,11 +74,5 @@ public class EmployeeController {
 		EmployeePerfilDTO employee = service.findById(id);
 		
 		return new ResponseEntity<>(employee, HttpStatus.OK);
-	}
-	
-	@GetMapping
-	public ResponseEntity<List<EmployeeAccount>> findAll() {
-		List<EmployeeAccount> employeeAll = service.findAll();
-		return new ResponseEntity<>(employeeAll, HttpStatus.OK);
 	}
 }

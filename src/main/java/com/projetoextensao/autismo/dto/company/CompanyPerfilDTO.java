@@ -10,6 +10,7 @@ public record CompanyPerfilDTO(
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy") 
 		LocalDate createdAt,
 		String companyName,
+		String email,
 		String logo,
 		String website,
 		String country, 

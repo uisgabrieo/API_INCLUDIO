@@ -27,13 +27,11 @@ public class CompanyService {
 		return companySave;
 	}
 
-	public Company findById(String  id) {
-		System.out.println(id);
+	public CompanyPerfilDTO findById(String  id) {
 		EmployerAccount employer = employerService.findById(id);
-		System.out.println(employer);
 		Optional<Company> company = repository.findByEmployer(employer);
-		System.out.println(company.get());
-		return company.get();
+		CompanyPerfilDTO companyPerfil = fromCompanyPerfil(company.get());
+		return companyPerfil;
 	}
 	
 	public CompanyPerfilDTO fromCompanyPerfil(Company obj) {
@@ -41,7 +39,8 @@ public class CompanyService {
 				employerService.fromPerfil(obj.getEmployer()),
 				obj.getCreatedAt(),
 				obj.getCompanyName(),
-				obj.getLogo(),
+				obj.getCompanyEmail(),
+				ConvertionImgFromBase64.showImage(obj.getLogo()),
 				obj.getWebsite(),
 				obj.getCountry(),
 				obj.getState(),
@@ -49,7 +48,6 @@ public class CompanyService {
 				obj.getNumberPhone(), 
 				obj.getCep(),
 				obj.getDescription());
-		System.out.println(company);
 		return company;
 	}
 	

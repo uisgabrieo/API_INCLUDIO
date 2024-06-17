@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.dto.company.CompanyPerfilDTO;
 import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
-import com.projetoextensao.autismo.model.entities.Company;
 import com.projetoextensao.autismo.model.entities.enums.GenderUser;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
 import com.projetoextensao.autismo.service.AccountService;
@@ -69,8 +68,7 @@ public class EmployerController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<CompanyPerfilDTO> findEmployee(@PathVariable String id) {
 		
-		Company company = companyService.findById(id);
-		CompanyPerfilDTO companyPerfil = companyService.fromCompanyPerfil(company);
+		CompanyPerfilDTO companyPerfil = companyService.findById(id);
 		
 		return new ResponseEntity<>(companyPerfil, HttpStatus.OK);
 	}
