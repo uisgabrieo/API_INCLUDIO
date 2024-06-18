@@ -56,6 +56,7 @@ public class EmployeeService {
 				obj.getState(), 
 				obj.getCity(), 
 				obj.getCep(), 
+				obj.getComplement(),
 				obj.getNumberPhone(), 
 				ConvertionImgFromBase64.showImage(obj.getPhotograph()), 
 				obj.getGender());

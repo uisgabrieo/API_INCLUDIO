@@ -45,6 +45,9 @@ public class CompanyService {
 				obj.getCountry(),
 				obj.getState(),
 				obj.getCity(),
+				obj.getNeighborhood(),
+				obj.getStreet(),
+				obj.getNumCompany(),
 				obj.getNumberPhone(), 
 				obj.getCep(),
 				obj.getDescription());

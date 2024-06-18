@@ -15,6 +15,7 @@ public record EmployeePerfilDTO(
 		String state, 
 		String city, 
 		String cep, 
+		String complement,
 		String numberPhone, 
 		String photograph,
 		GenderUser gender) {

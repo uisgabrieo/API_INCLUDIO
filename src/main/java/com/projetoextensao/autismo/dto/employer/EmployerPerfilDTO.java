@@ -13,7 +13,8 @@ public record EmployerPerfilDTO(
 		String country, 
 		String state, 
 		String city, 
-		String cep, 
+		String cep,
+		String complement,
 		String numberPhone, 
 		String photograph,
 		GenderUser gender) {

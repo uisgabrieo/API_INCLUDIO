@@ -16,6 +16,9 @@ public record CompanyPerfilDTO(
 		String country, 
 		String state, 
 		String city, 
+		String neighborhood,
+		String street,
+		String numCompany,
 		String numberPhone, 
 		String cep, 
 		String description
