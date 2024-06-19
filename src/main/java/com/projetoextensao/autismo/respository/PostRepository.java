@@ -10,6 +10,8 @@ import com.projetoextensao.autismo.model.entities.Post;
 @Repository
 public interface PostRepository extends MongoRepository<Post, String>{
 
+	List<Post> findByAuthorId(String id);
+	
 	List<Post> findByFieldContainingIgnoreCase(String field);
 	
 	List<Post> findByRoleContainingIgnoreCase(String text);

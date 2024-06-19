@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,10 +34,27 @@ public class PostController {
 		return new ResponseEntity<>(posts, HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/all/{id}")
+	public ResponseEntity<List<Post>> allPostOneAuthor(@PathVariable String id) {
+		List<Post> posts = service.findByAuthor(id);
+		return new ResponseEntity<>(posts, HttpStatus.OK);
+	}
+	
 	@GetMapping(value = "{id}")
 	public ResponseEntity<Post> findById(@PathVariable String id) {
 		Post post = service.findById(id);
 		return new ResponseEntity<>(post, HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deleteById(@PathVariable String id) {
+		System.out.println("ID: "  + id);
+	    try {
+	        service.deleteById(id);
+	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	    } catch (Exception e) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
 	}
 	
 	@GetMapping(value = "/filter")

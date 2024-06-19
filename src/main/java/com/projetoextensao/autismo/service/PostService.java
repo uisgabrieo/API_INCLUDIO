@@ -30,10 +30,20 @@ public class PostService {
 	}
 	
 	public Post findById(String id) {
-		
 		Optional<Post> post = repository.findById(id);
 		
 		return post.get();
+	}
+	
+	public void deleteById(String id) {
+		repository.deleteById(id);
+		
+	}
+	
+	public List<Post> findByAuthor(String id) {
+		List<Post> posts = repository.findByAuthorId(id);
+		
+		return posts;
 	}
 	
 	public List<Post> filter(String field) {
@@ -73,6 +83,7 @@ public class PostService {
 				postDTO.city(),
 				postDTO.field(),
 				new AuthorDTO(
+						company.employer().id(),
 						company.logo(),
 						company.employer().completeName(),
 						company.email(),

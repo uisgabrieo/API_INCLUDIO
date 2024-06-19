@@ -49,6 +49,7 @@ public class EmployerService {
 	
 	public EmployerPerfilDTO fromPerfil(EmployerAccount obj) {
 		EmployerPerfilDTO perfil = new EmployerPerfilDTO(
+				obj.getId(),
 				obj.getCompleteName(),
 				obj.getEmail(),
 				obj.getDateOfBirth(),
