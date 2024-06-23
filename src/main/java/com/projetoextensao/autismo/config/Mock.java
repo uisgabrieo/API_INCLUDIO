@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +21,7 @@ import com.projetoextensao.autismo.respository.AccountRepository;
 import com.projetoextensao.autismo.respository.CompanyRepository;
 import com.projetoextensao.autismo.respository.EmployeeRepository;
 import com.projetoextensao.autismo.respository.EmployerRepository;
-import com.projetoextensao.autismo.respository.PostRepository;
+//import com.projetoextensao.autismo.respository.PostRepository;
 
 @Configuration
 public class Mock implements CommandLineRunner{
@@ -40,8 +39,8 @@ public class Mock implements CommandLineRunner{
 	@Autowired
 	private CompanyRepository companyRepository;
 	
-	@Autowired
-	private PostRepository postRepository;
+	//@Autowired
+	//private PostRepository postRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
