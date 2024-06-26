@@ -193,6 +193,14 @@ public class EmployeeAccount extends Account{
 	public void setPhotograph(String photograph) {
 		this.photograph = photograph;
 	}
+
+	@Override
+	public String toString() {
+		return "EmployeeAccount [id=" + id + ", country=" + country + ", state=" + state + ", city=" + city + ", cep="
+				+ cep + ", complement=" + complement + ", cpf=" + cpf + ", numberPhone=" + numberPhone + ", sector="
+				+ sector + ", training=" + training + ", institution=" + institution + ", dateOfBirth=" + dateOfBirth
+				+ ", gender=" + gender + ", diagnostic=" + diagnostic + ", photograph=" + photograph + "]";
+	}
 	
 	
 	

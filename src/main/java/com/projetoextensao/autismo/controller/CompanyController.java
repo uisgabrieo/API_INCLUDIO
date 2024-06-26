@@ -40,7 +40,7 @@ public class CompanyController {
 	@PostMapping(value = "/register")
 	public ResponseEntity<Company> registerEmployer(
 			@RequestParam("idEmployer") String id,
-            @RequestParam("logo") MultipartFile logo,
+            @RequestParam(required = false, value =  "logo") MultipartFile logo,
             @RequestParam("companyName") String companyName,
             @RequestParam("companyEmail") String companyEmail,
             @RequestParam("country") String countryCompany,
@@ -56,16 +56,19 @@ public class CompanyController {
             @RequestParam("numberPhone") String numberPhoneCompany,
             @RequestParam("desciption") String description) {
 		
-		if(companyRepository.findByCompanyEmail(companyEmail) != null) {
+		System.out.println("entrou company");
+		if(!companyRepository.findByCompanyEmail(companyEmail).isEmpty()) {
+			System.out.println(companyRepository.findByCompanyEmail(companyEmail));
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);			
 		}
 		
 		EmployerAccount employer = employerService.findById(id);
 		CompanyFormDTO companyDTO = new CompanyFormDTO(employer, logo, companyName, companyEmail, countryCompany, stateCompany, cityCompany, cepCompany, neighborhoodCompany, street, numCompany, createdAt, cnpj, website, numberPhoneCompany, description);
 
-		Company companySave	 = service.saveCompany(companyDTO);
-		;
-		return new ResponseEntity<>(companySave, HttpStatus.OK);
+		Company company = service.saveCompany(companyDTO);
+		System.out.println(company);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{id}")

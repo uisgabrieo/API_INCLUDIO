@@ -62,7 +62,7 @@ public class EmployeeController {
             @RequestParam("gender") GenderUser gender) {
 		
 		if (!employeeRepository.findByEmail(email).isEmpty()) {
-			System.out.println(employeeRepository.findByEmail("Empty: " + email));
+			System.out.println("Empty: " + employeeRepository.findByEmail(email).toString());
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
@@ -72,10 +72,10 @@ public class EmployeeController {
 		EmployeeFormDTO employeeDTO = new EmployeeFormDTO(country, state, city, cep, complement, cpf, numberPhone, sector, training, institution, dateOfBirth, gender, diagnostic, photograph);
         AccountFormDTO accountDTO = new AccountFormDTO(completeName, email, encryptedPassword, account);        
         
-		EmployeeAccount employeeSave = service.saveEmployee(accountDTO, employeeDTO);
+		service.saveEmployee(accountDTO, employeeDTO);
 		accountService.saveAccount(accountDTO);
 		
-		return new ResponseEntity<>(employeeSave, HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	

@@ -62,6 +62,14 @@ public class Account implements UserDetails {
 	public void setAccount(TypeAccount account) {
 		this.account = account;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Account [completeName=" + completeName + ", email=" + email + ", password=" + password + ", account="
+				+ account + "]";
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

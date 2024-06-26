@@ -1,4 +1,4 @@
-package com.projetoextensao.autismo.config.security;
+package com.projetoextensao.autismo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projetoextensao.autismo.config.security.TokenService;
 import com.projetoextensao.autismo.dto.account.AccountLoginDTO;
 import com.projetoextensao.autismo.dto.account.AccountResponseDTO;
 import com.projetoextensao.autismo.model.entities.Account;
-import com.projetoextensao.autismo.service.AccountService;
 
 import jakarta.validation.Valid;
 
@@ -25,9 +25,6 @@ public class AuthenticationController {
 	private AuthenticationManager authenticationManager;
 	
 	@Autowired
-	private AccountService service;
-	
-	@Autowired
 	private TokenService tokenService;
 	
 	@PostMapping("/login")
@@ -36,14 +33,10 @@ public class AuthenticationController {
 		var loginUser = new UsernamePasswordAuthenticationToken(login.email(), login.password());
 		var auth = authenticationManager.authenticate(loginUser);
 		
-		if(auth.isAuthenticated()) {
-			var token = tokenService.generateToken((Account)auth.getPrincipal());
-			
-			AccountResponseDTO accountResponse = service.searchId(login, token);
-			return new ResponseEntity<>(accountResponse, HttpStatus.OK);
-		}
+		var token = tokenService.generateToken((Account)auth.getPrincipal());
 		
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(new AccountResponseDTO(token), HttpStatus.OK);
+
 	}
 	
 
