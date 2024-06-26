@@ -11,7 +11,7 @@ import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
 
 @Document(collection = "employer_accounts")
 public class EmployerAccount extends Account{
-	
+	private static final long serialVersionUID = 1L;
 	@Id
 	private String id;
 	private String country;

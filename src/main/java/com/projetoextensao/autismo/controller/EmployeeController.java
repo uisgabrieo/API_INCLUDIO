@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.projetoextensao.autismo.dto.employee.EmployeePerfilDTO;
 import com.projetoextensao.autismo.model.entities.EmployeeAccount;
 import com.projetoextensao.autismo.model.entities.enums.GenderUser;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
+import com.projetoextensao.autismo.respository.EmployeeRepository;
 import com.projetoextensao.autismo.service.AccountService;
 import com.projetoextensao.autismo.service.EmployeeService;
 
@@ -34,6 +36,9 @@ public class EmployeeController {
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	@PostMapping(value = "/register")
 	public ResponseEntity<EmployeeAccount> registerEmployee(
@@ -52,15 +57,21 @@ public class EmployeeController {
             @RequestParam("training") String training,
             @RequestParam("institution") String institution,
             @RequestParam("dateOfBirth") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateOfBirth,
-            @RequestParam("photograph") MultipartFile photograph,
-			@RequestParam("diagnostic") MultipartFile diagnostic,
+            @RequestParam(required = false,value = "photograph") MultipartFile photograph,
+			@RequestParam(required = false, value = "diagnostic") MultipartFile diagnostic,
             @RequestParam("gender") GenderUser gender) {
 		
+		if (!employeeRepository.findByEmail(email).isEmpty()) {
+			System.out.println(employeeRepository.findByEmail("Empty: " + email));
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		String encryptedPassword = new BCryptPasswordEncoder().encode(password);
+		
+		
 		EmployeeFormDTO employeeDTO = new EmployeeFormDTO(country, state, city, cep, complement, cpf, numberPhone, sector, training, institution, dateOfBirth, gender, diagnostic, photograph);
-        AccountFormDTO accountDTO = new AccountFormDTO(completeName, email, password, account);        
+        AccountFormDTO accountDTO = new AccountFormDTO(completeName, email, encryptedPassword, account);        
         
-		System.out.println(employeeDTO);
-		System.out.println(accountDTO);
 		EmployeeAccount employeeSave = service.saveEmployee(accountDTO, employeeDTO);
 		accountService.saveAccount(accountDTO);
 		

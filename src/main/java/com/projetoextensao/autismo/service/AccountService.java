@@ -1,8 +1,9 @@
 package com.projetoextensao.autismo.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
@@ -13,7 +14,7 @@ import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
 import com.projetoextensao.autismo.respository.AccountRepository;
 
 @Service
-public class AccountService {
+public class AccountService implements UserDetailsService{
 
 	@Autowired
 	private AccountRepository repository;
@@ -29,26 +30,20 @@ public class AccountService {
 		Account accountSave = repository.save(account);
 		return accountSave;
 	}
-	
-	public AccountResponseDTO valiation(AccountLoginDTO login) {
-		Optional<Account> account = repository.findByEmail(login.email());
-		if (account.get().getPassword().equals(login.password())) {
-			AccountResponseDTO accountResponse = searchId(account.get());
-			return accountResponse;
-		}
-		return null;
-	}
 
-	public AccountResponseDTO searchId(Account obj) {
-		String email = obj.getEmail();
-		if (obj.getAccount().equals(TypeAccount.EMPLOYEE)) {
+	public AccountResponseDTO searchId(AccountLoginDTO obj, String token) {
+		String email = obj.email();
+		UserDetails user = repository.findByEmail(email);
+		
+		Account account = (Account) user;
+		if (account.getAccount().equals(TypeAccount.EMPLOYEE)) {
 			String id = employeeService.searchId(email);	
-			AccountResponseDTO account = new AccountResponseDTO(id, obj.getAccount());
-			return account;
-		} else if (obj.getAccount().equals(TypeAccount.EMPLOYER)) {
+			AccountResponseDTO accountResponse = new AccountResponseDTO(id, token, account.getAccount());
+			return accountResponse;
+		} else if (account.getAccount().equals(TypeAccount.EMPLOYER)) {
 			String id = employerService.searchId(email);
-			AccountResponseDTO account = new AccountResponseDTO(id, obj.getAccount());
-			return account;
+			AccountResponseDTO accountResponse = new AccountResponseDTO(id, token, account.getAccount());
+			return accountResponse;
 		}
 		return null;
 	}
@@ -60,6 +55,11 @@ public class AccountService {
 				dto.password(), 
 				dto.account()); 
 		return account;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		return repository.findByEmail(email);
 	}
 	
 }

@@ -40,15 +40,4 @@ public class AccountController {
 //		}
 //		return null;
 //	}
-	
-	@PostMapping("/login")
-	public ResponseEntity<AccountResponseDTO> loginAccount(@RequestBody AccountLoginDTO login) {
-
-		AccountResponseDTO loginId = service.valiation(login);
-		if (loginId != null) {
-			return new ResponseEntity<>(loginId, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
-	}
 }

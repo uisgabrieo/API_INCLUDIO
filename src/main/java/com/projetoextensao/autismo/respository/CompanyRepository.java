@@ -9,9 +9,12 @@ import com.projetoextensao.autismo.model.entities.Company;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
 
 
+
 @Repository
 public interface CompanyRepository extends MongoRepository<Company, String>{
 
 	Optional<Company> findByEmployer(EmployerAccount employer);
+	
+	Optional<Company> findByCompanyEmail(String companyEmail);
 	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.projetoextensao.autismo.dto.company.CompanyPerfilDTO;
 import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
 import com.projetoextensao.autismo.model.entities.enums.GenderUser;
 import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
+import com.projetoextensao.autismo.respository.AccountRepository;
 import com.projetoextensao.autismo.service.AccountService;
 import com.projetoextensao.autismo.service.CompanyService;
 import com.projetoextensao.autismo.service.EmployerService;
@@ -31,6 +33,9 @@ public class EmployerController {
 	
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private AccountRepository accountRepository;
 	
 	@Autowired
 	private AccountService accountService;
@@ -56,9 +61,16 @@ public class EmployerController {
             @RequestParam("photograph") MultipartFile photograph,
             @RequestParam("gender") GenderUser gender) {
 		
-		AccountFormDTO accountDTO = new AccountFormDTO(completeName, email, password, account);
+		if(accountRepository.findByEmail(email) != null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);			
+		}
+		
+		String encryptedPassword = new BCryptPasswordEncoder().encode(password); 
+		
+		AccountFormDTO accountDTO = new AccountFormDTO(completeName, email, encryptedPassword, account);
 		EmployerFormDTO employerDTO = new EmployerFormDTO(null, country, state, city, cep, cpf, complement, numberPhone, jobTitle, dateOfBirth, photograph, gender);
-			
+		
+		
 		String idEmployer = service.saveEmployer(employerDTO, accountDTO);
 		accountService.saveAccount(accountDTO);
 		

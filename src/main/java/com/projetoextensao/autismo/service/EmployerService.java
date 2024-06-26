@@ -5,11 +5,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projetoextensao.autismo.config.util.ConvertionImgFromBase64;
 import com.projetoextensao.autismo.dto.account.AccountFormDTO;
 import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
 import com.projetoextensao.autismo.dto.employer.EmployerPerfilDTO;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
-import com.projetoextensao.autismo.model.util.ConvertionImgFromBase64;
 import com.projetoextensao.autismo.respository.EmployerRepository;
 
 @Service

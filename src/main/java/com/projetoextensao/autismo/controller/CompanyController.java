@@ -18,6 +18,7 @@ import com.projetoextensao.autismo.dto.company.CompanyFormDTO;
 import com.projetoextensao.autismo.dto.company.CompanyPerfilDTO;
 import com.projetoextensao.autismo.model.entities.Company;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
+import com.projetoextensao.autismo.respository.CompanyRepository;
 import com.projetoextensao.autismo.service.CompanyService;
 import com.projetoextensao.autismo.service.EmployerService;
 
@@ -29,6 +30,9 @@ public class CompanyController {
 	
 	@Autowired
 	private CompanyService service;
+	
+	@Autowired
+	private CompanyRepository companyRepository;
 	
 	@Autowired
 	private EmployerService employerService;
@@ -51,6 +55,10 @@ public class CompanyController {
             @RequestParam("website") String website,
             @RequestParam("numberPhone") String numberPhoneCompany,
             @RequestParam("desciption") String description) {
+		
+		if(companyRepository.findByCompanyEmail(companyEmail) != null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);			
+		}
 		
 		EmployerAccount employer = employerService.findById(id);
 		CompanyFormDTO companyDTO = new CompanyFormDTO(employer, logo, companyName, companyEmail, countryCompany, stateCompany, cityCompany, cepCompany, neighborhoodCompany, street, numCompany, createdAt, cnpj, website, numberPhoneCompany, description);

@@ -1,7 +1,7 @@
 package com.projetoextensao.autismo.dto;
 
+import com.projetoextensao.autismo.config.util.ConvertionImgFromBase64;
 import com.projetoextensao.autismo.model.entities.Company;
-import com.projetoextensao.autismo.model.util.ConvertionImgFromBase64;
 
 public record AuthorDTO (
 		String id,

@@ -12,7 +12,7 @@ import com.projetoextensao.autismo.model.entities.enums.TypeAccount;
 
 @Document(collection = "employee_accounts")
 public class EmployeeAccount extends Account{
-	
+	private static final long serialVersionUID = 1L;
 	@Id
 	private String id;
 	private String country;
