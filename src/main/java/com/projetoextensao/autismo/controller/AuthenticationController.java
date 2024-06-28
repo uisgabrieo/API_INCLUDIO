@@ -14,6 +14,7 @@ import com.projetoextensao.autismo.config.security.TokenService;
 import com.projetoextensao.autismo.dto.account.AccountLoginDTO;
 import com.projetoextensao.autismo.dto.account.AccountResponseDTO;
 import com.projetoextensao.autismo.model.entities.Account;
+import com.projetoextensao.autismo.service.AccountService;
 
 import jakarta.validation.Valid;
 
@@ -27,17 +28,23 @@ public class AuthenticationController {
 	@Autowired
 	private TokenService tokenService;
 	
+	@Autowired
+	private AccountService service;
+	
 	@PostMapping("/login")
 	public ResponseEntity<AccountResponseDTO> loginAccount(@RequestBody @Valid AccountLoginDTO login) {
 
 		var loginUser = new UsernamePasswordAuthenticationToken(login.email(), login.password());
 		var auth = authenticationManager.authenticate(loginUser);
-		
-		var token = tokenService.generateToken((Account)auth.getPrincipal());
-		
-		return new ResponseEntity<>(new AccountResponseDTO(token), HttpStatus.OK);
 
+		if(auth.isAuthenticated()) {
+			var token = tokenService.generateToken((Account)auth.getPrincipal());
+
+			AccountResponseDTO accountResponse = service.searchId(login, token);
+			return new ResponseEntity<>(accountResponse, HttpStatus.OK);
+		}
+
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
 
 }

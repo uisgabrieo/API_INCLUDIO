@@ -1,5 +1,6 @@
 package com.projetoextensao.autismo.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ public class PostService {
 	
 	public List<Post> findAll() {
 		List<Post> posts = repository.findAll();
+		Collections.reverse(posts);
 		return posts;
 	}
 	
