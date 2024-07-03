@@ -40,6 +40,12 @@ public class EmployerService {
 		return account.get();
 	}
 	
+	public EmployerAccount findByEmail(String email) {
+		Optional<EmployerAccount> employer = repository.findByEmail(email);
+		
+		return employer.get();
+	}
+	
 	public String searchId(String email) {
 		Optional<EmployerAccount> employer = repository.findByEmail(email);
 		System.out.println(employer);

@@ -38,11 +38,11 @@ public class AccountService implements UserDetailsService{
 		Account account = (Account) user;
 		if (account.getAccount().equals(TypeAccount.EMPLOYEE)) {
 			String id = employeeService.searchId(email);	
-			AccountResponseDTO accountResponse = new AccountResponseDTO(id, token, account.getAccount());
+			AccountResponseDTO accountResponse = new AccountResponseDTO(id, token, account.getEmail(), account.getAccount());
 			return accountResponse;
 		} else if (account.getAccount().equals(TypeAccount.EMPLOYER)) {
 			String id = employerService.searchId(email);
-			AccountResponseDTO accountResponse = new AccountResponseDTO(id, token, account.getAccount());
+			AccountResponseDTO accountResponse = new AccountResponseDTO(id, token, account.getEmail(), account.getAccount());
 			return accountResponse;
 		}
 		return null;

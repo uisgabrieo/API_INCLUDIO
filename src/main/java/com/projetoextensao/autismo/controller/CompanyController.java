@@ -16,8 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.projetoextensao.autismo.dto.company.CompanyFormDTO;
 import com.projetoextensao.autismo.dto.company.CompanyPerfilDTO;
+import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
 import com.projetoextensao.autismo.model.entities.Company;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
+import com.projetoextensao.autismo.model.entities.enums.GenderUser;
 import com.projetoextensao.autismo.respository.CompanyRepository;
 import com.projetoextensao.autismo.service.CompanyService;
 import com.projetoextensao.autismo.service.EmployerService;
@@ -56,11 +58,10 @@ public class CompanyController {
             @RequestParam("numberPhone") String numberPhoneCompany,
             @RequestParam("desciption") String description) {
 		
-		System.out.println("entrou company");
 		if(!companyRepository.findByCompanyEmail(companyEmail).isEmpty()) {
-			System.out.println(companyRepository.findByCompanyEmail(companyEmail));
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);			
 		}
+		
 		
 		EmployerAccount employer = employerService.findById(id);
 		CompanyFormDTO companyDTO = new CompanyFormDTO(employer, logo, companyName, companyEmail, countryCompany, stateCompany, cityCompany, cepCompany, neighborhoodCompany, street, numCompany, createdAt, cnpj, website, numberPhoneCompany, description);
@@ -69,6 +70,41 @@ public class CompanyController {
 		System.out.println(company);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/edit")
+	public ResponseEntity<Company> editPerfil(
+			@RequestParam("email") String email,
+			@RequestParam("photograph") MultipartFile photograph,
+			@RequestParam("country") String country,
+			@RequestParam("state") String state,
+			@RequestParam("city") String city,
+			@RequestParam("complement") String complement,
+			@RequestParam("cep") String cep,
+			@RequestParam("jobTitle") String jobTitle,
+			@RequestParam("completeName") String completeName,
+			@RequestParam("numberPhone") String numberPhone,
+			@RequestParam("gender") GenderUser gender,
+			@RequestParam(required = false, value = "logo") MultipartFile logo,
+			@RequestParam("companyName") String companyName,
+			@RequestParam("website") String website,
+			@RequestParam("countryCompany") String countryCompany,
+			@RequestParam("stateCompany") String stateCompany,
+			@RequestParam("cityCompany") String cityCompany,
+			@RequestParam("neighbordhood") String neighborhood,
+			@RequestParam("street") String street,
+			@RequestParam("numCompany") String numCompany,
+			@RequestParam("companyCep") String companyCep,
+			@RequestParam("numberPhoneCompany") String numberPhoneCompany,
+			@RequestParam("description") String description) {
+		System.out.println("Entrou");
+		EmployerFormDTO employerUpdate = new EmployerFormDTO(null, country, state, city, cep, complement, null,  numberPhone, jobTitle, null, photograph, gender);
+		CompanyFormDTO companyUpdate = new CompanyFormDTO(null, logo, companyName, null, countryCompany, stateCompany, cityCompany, companyCep, neighborhood, street, numCompany, null, null, website, numberPhoneCompany, description);
+		
+		Company company = service.update(companyUpdate, employerUpdate, email);
+		System.out.println(company.toString());
+		
+		return new ResponseEntity<>(company, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{id}")

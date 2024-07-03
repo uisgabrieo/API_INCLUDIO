@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projetoextensao.autismo.config.util.ConvertionImgFromBase64;
+import com.projetoextensao.autismo.config.util.Update;
 import com.projetoextensao.autismo.dto.company.CompanyFormDTO;
 import com.projetoextensao.autismo.dto.company.CompanyPerfilDTO;
+import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
 import com.projetoextensao.autismo.model.entities.Company;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
 import com.projetoextensao.autismo.respository.CompanyRepository;
@@ -52,6 +54,20 @@ public class CompanyService {
 				obj.getCep(),
 				obj.getDescription());
 		return company;
+	}
+	
+	public Company update(CompanyFormDTO objCompany, EmployerFormDTO objEmployer, String email) {
+		EmployerAccount employer = employerService.findByEmail(email);
+		Company company = repository.findByEmployer(employer).get();
+		updateCompany(objCompany, objEmployer, employer, company);
+		
+		return repository.save(company);
+	}
+	
+	private void updateCompany(CompanyFormDTO objCompany, EmployerFormDTO objEmployer, EmployerAccount employer, Company company) {
+
+		Update.updateDate(employer, objEmployer);
+		Update.updateDate(company, objCompany);
 	}
 	
 	private Company dtoFromCompany(CompanyFormDTO companyDTO) {
