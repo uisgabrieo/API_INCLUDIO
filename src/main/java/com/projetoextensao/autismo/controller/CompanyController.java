@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.projetoextensao.autismo.dto.company.CompanyFormDTO;
 import com.projetoextensao.autismo.dto.company.CompanyPerfilDTO;
-import com.projetoextensao.autismo.dto.employer.EmployerFormDTO;
+import com.projetoextensao.autismo.dto.employer.EmployerEditPerfil;
 import com.projetoextensao.autismo.model.entities.Company;
 import com.projetoextensao.autismo.model.entities.EmployerAccount;
 import com.projetoextensao.autismo.model.entities.enums.GenderUser;
@@ -98,7 +98,7 @@ public class CompanyController {
 			@RequestParam("numberPhoneCompany") String numberPhoneCompany,
 			@RequestParam("description") String description) {
 		System.out.println("Entrou");
-		EmployerFormDTO employerUpdate = new EmployerFormDTO(null, country, state, city, cep, complement, null,  numberPhone, jobTitle, null, photograph, gender);
+		EmployerEditPerfil employerUpdate = new EmployerEditPerfil(country, state, city, complement, cep, completeName, numberPhone, gender, photograph, jobTitle);
 		CompanyFormDTO companyUpdate = new CompanyFormDTO(null, logo, companyName, null, countryCompany, stateCompany, cityCompany, companyCep, neighborhood, street, numCompany, null, null, website, numberPhoneCompany, description);
 		
 		Company company = service.update(companyUpdate, employerUpdate, email);

@@ -18,11 +18,14 @@ public class EmployerService {
 	@Autowired
 	private EmployerRepository repository;
 	
-	public EmployerAccount saveEmployer(EmployerFormDTO employerDTO) {
-		EmployerAccount employer = dtoFromEmployer(employerDTO);
-		EmployerAccount employerSave = repository.save(employer);
-		
-		return employerSave;
+//	public EmployerAccount saveEmployer(EmployerFormDTO employerDTO) {
+//		EmployerAccount employer = dtoFromEmployer(employerDTO);
+//		EmployerAccount employerSave = repository.save(employer);
+//		
+//		return employerSave;
+//	}
+	public EmployerAccount saveEmployer(EmployerAccount emp) {
+		return repository.save(emp);
 	}
 	
 	public String saveEmployer(EmployerFormDTO employerDTO, AccountFormDTO accountFormDTO) {
@@ -71,22 +74,23 @@ public class EmployerService {
 		return perfil;
 	}
 	
-	private EmployerAccount dtoFromEmployer(EmployerFormDTO obj) {
-		EmployerAccount employer = new EmployerAccount(
-				obj.id(),
-				obj.country(),
-				obj.state(),
-				obj.city(),
-				obj.cep(),
-				obj.complement(),
-				obj.cpf(),
-				obj.numberPhone(),
-				obj.jobTitle(),
-				obj.dateOfBirth(),
-				ConvertionImgFromBase64.convertFromBase64(obj.photograph()),
-				obj.gender());
-		return employer;
-	}
+//	private EmployerAccount dtoFromEmployer(EmployerFormDTO obj) {
+//		EmployerAccount employer = new EmployerAccount(
+//				obj.id(),
+//				obj.country(),
+//				obj.state(),
+//				obj.city(),
+//				obj.cep(),
+//				obj.complement(),
+//				obj.cpf(),
+//				obj.numberPhone(),
+//				obj.jobTitle(),
+//				obj.dateOfBirth(),
+//				ConvertionImgFromBase64.convertFromBase64(obj.photograph()),
+//				obj.gender());
+//		return employer;
+//	}
+	
 	private EmployerAccount dtoFromEmployer(EmployerFormDTO obj, AccountFormDTO acc) {
 		EmployerAccount employer = new EmployerAccount(
 				acc.completeName(), 
