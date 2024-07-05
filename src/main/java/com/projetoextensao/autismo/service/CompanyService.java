@@ -19,8 +19,8 @@ public class CompanyService {
 	@Autowired
 	private CompanyRepository repository;
 	
-	@Autowired
-	private AccountService accountService;
+	//@Autowired
+	//private AccountService accountService;
 	
 	@Autowired
 	private EmployerService employerService;
