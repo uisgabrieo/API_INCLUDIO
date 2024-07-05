@@ -20,6 +20,9 @@ public class CompanyService {
 	private CompanyRepository repository;
 	
 	@Autowired
+	private AccountService accountService;
+	
+	@Autowired
 	private EmployerService employerService;
 
 	public Company saveCompany(CompanyFormDTO companyDTO) {
@@ -73,7 +76,10 @@ public class CompanyService {
 		if (obj.city() != null) emp.setCity(obj.city());
 		if (obj.complement() != null) emp.setComplement(obj.complement());
 		if (obj.cep() != null) emp.setCep(obj.cep());
-		if (obj.completeName() != null) emp.setCompleteName(obj.completeName());
+		if (obj.completeName() != null) {
+			emp.setCompleteName(obj.completeName());
+			//accountService.saveName(obj.completeName(), emp.getEmail());
+		}
 		if (obj.numberPhone() != null) emp.setNumberPhone(obj.numberPhone());
 		if (obj.gende() != null) emp.setGender(obj.gende());
 		if (obj.photograph() != null) emp.setPhotograph(ConvertionImgFromBase64.convertFromBase64(obj.photograph()));

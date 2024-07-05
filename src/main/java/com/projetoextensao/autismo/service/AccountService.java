@@ -31,6 +31,16 @@ public class AccountService implements UserDetailsService{
 		return accountSave;
 	}
 	
+//    public void saveName(String name, String email) {
+//        Account account = (Account) repository.findByEmail(email);
+//        if (account != null) {
+//            account.setCompleteName(name);
+//            repository.save(account);
+//        } else {
+//            System.out.println("Account not found for email: " + email);
+//        }
+//    }
+	
 	public AccountResponseDTO searchId(AccountLoginDTO obj, String token) {
 		String email = obj.email();
 		UserDetails user = repository.findByEmail(email);
