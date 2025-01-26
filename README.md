@@ -11,7 +11,7 @@ O sistema foi desenvolvido utilizando o framework Spring Boot, com foco na const
 - **Java**: Linguagem principal do projeto.
 - **Spring Framework**: Para a construção da aplicação back-end.
   - **Spring Boot**: Facilitando a inicialização e configuração do projeto.
-  - **Spring Data JPA**: Integração com o JPA para manipulação de dados.
+  - **Spring Data MongoDB**: Integração com o MongoDB para manipulação de dados.
   - **Spring Security**: Para autenticação e controle de acesso.
   - **Spring Web**: Para a criação de APIs REST.
 - **Banco de Dados**:
