@@ -37,7 +37,7 @@ O projeto segue uma arquitetura bem organizada para facilitar a manutenção e e
 
 ````
 src/main/java/
-|-- com.projetoextensao/.autismo
+|-- com.projetoextensao.autismo
     |-- config/           # Configurações de segurança e banco de dados
     |-- controller/       # Controladores REST para gerenciar as entidades
     |-- model/            # Modelos das entidades 
