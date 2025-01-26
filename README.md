@@ -37,10 +37,11 @@ O projeto segue uma arquitetura bem organizada para facilitar a manutenção e e
 
 ````
 src/main/java/
-|-- com.includio.api
+|-- com.projetoextensao/.autismo
     |-- config/           # Configurações de segurança e banco de dados
     |-- controller/       # Controladores REST para gerenciar as entidades
-    |-- model/            # Modelos das entidades (Usuários, Vagas, Empresas)
+    |-- model/            # Modelos das entidades 
+    |-- exception/        # Tratamento de alguma exceções
     |-- repository/       # Interfaces para acesso aos dados
     |-- service/          # Lógica de negócios
     |-- dto/              # Objetos de transferência de dados (DTOs)
